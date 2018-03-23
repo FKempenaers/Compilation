@@ -5,16 +5,12 @@
 
 
 int main (int argc, char* argv[]){
-  int i;
-  /*snake = malloc(3*sizeof(double*));
-  for(i=0;i<3;i++)
-    snake[i]=malloc(3*sizeof(double));
-  */
+
   k = angle = compteur = 0;
   increment = 0.25;
-  vitesse = 0.5;
+  vitesse = 0.10;
   xD=0;
-  xs = MINX+RAYON;
+  xs = MINX+RAYON*4;
   ys = MINY;
   zs = 0;
 
@@ -24,9 +20,9 @@ int main (int argc, char* argv[]){
   snake[1][2] = 0;
   snake[2][2] = 0;
 
-  for(i=1; i<3; i++){
-    snake[i][0] = snake[i-1][0]-RAYON;
-  }
+  snake[1][0] = MINX+RAYON*2;
+  snake[2][0] = MINX;
+
 
   printf("start\n");
   printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);

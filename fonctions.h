@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-#define PIXELS_X 600
-#define PIXELS_Y 600
+#define PIXELS_X 1600
+#define PIXELS_Y 900
 #define RATIO = PIXELS_X/PIXELS_Y
 
 #define TAILLE_X PIXELS_X
@@ -12,7 +12,7 @@
 #define MINX 0
 #define MINY 0
 #define TAILLE_PIXEL 0.5
-#define RAYON 2
+#define RAYON 0.5
 
 int k,xC,yC,xD,yD;
 double xs,ys,zs;

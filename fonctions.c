@@ -13,7 +13,7 @@ void affichage(){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(100,(double)TAILLE_X/TAILLE_Y,0.1,100);
-  gluLookAt(0,0,10,16,16,0,0,0,1);
+  gluLookAt(16,0,16,16,16,0,0,0,1);
   glRotatef(angle,0,0,1);
   trace_grille();
 
@@ -31,6 +31,7 @@ void affichage(){
 }
 
 void animer(){
+  int i,j;
   /* angle += increment;
   if(angle > 360)
     angle = 0;
@@ -65,13 +66,28 @@ void animer(){
     xD++;
   if(xD==3&&ys<=MINY)
     xD=0;
+
+  if(increment>0){
+    for(i=2; i>0; i--){
+      for(j=0; j<3; j++){
+	snake[i][j] = snake[i-1][j];
+      }
+    }
+    snake[0][0] = xs;
+    snake[0][1] = ys;
+    snake[0][2] = zs;
+  }
+
+
+  
   
   
     glutPostRedisplay();
 }
 
 void clavier(unsigned char key, int x, int y){
-  increment = -increment;
+  //increment = -increment;
+  pause();
   glutPostRedisplay();
 }
 
@@ -79,8 +95,8 @@ void clavier(unsigned char key, int x, int y){
 void trace_grille(){
   int i,j;
   glColor3ub(255,255,255);
-  for(i = MINX; i < MAXX; i++){
-    for(j = MINY; j < MAXY; j++){
+  for(i = MINX; i <= MAXX; i++){
+    for(j = MINY; j <= MAXY; j++){
       glBegin(GL_LINES);
       glVertex2i(i,MINY);
       glVertex2i(i,MAXY);
@@ -104,14 +120,6 @@ void trace_grille(){
 
 void affiche_snake(double x, double y, double z){
   int i,j;
-  for(i=2; i>0; i--){
-    for(j=0; j<3; j++){
-      snake[i][j] = snake[i-1][j];
-    }
-  }
-  snake[0][0] = x;
-  snake[0][1] = y;
-  snake[0][2] = z;
 
   printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);
   printf("sphere 2 : %lf %lf\n",snake[1][0],snake[1][1]);

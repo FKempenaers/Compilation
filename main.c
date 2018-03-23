@@ -9,25 +9,30 @@ int main (int argc, char* argv[]){
   /*snake = malloc(3*sizeof(double*));
   for(i=0;i<3;i++)
     snake[i]=malloc(3*sizeof(double));
-  */k = 0;
-  angle = 0;
+  */
+  k = angle = compteur = 0;
   increment = 0.25;
   vitesse = 0.5;
   xD=0;
-  xs = MINX;
+  xs = MINX+RAYON;
   ys = MINY;
   zs = 0;
 
-  snake[0][0] = MINX+4*RAYON;
-  snake[0][1] = MINY+4*RAYON;
+  snake[0][0] = xs;
+  snake[0][1] = ys;
   snake[0][2] = 0;
   snake[1][2] = 0;
   snake[2][2] = 0;
 
   for(i=1; i<3; i++){
-    snake[i][0] = snake[i-1][0]-2*RAYON;
+    snake[i][0] = snake[i-1][0]-RAYON;
   }
 
+  printf("start\n");
+  printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);
+  printf("sphere 2 : %lf %lf\n",snake[1][0],snake[1][1]);
+  printf("sphere 3 : %lf %lf\n",snake[2][0],snake[2][1]);
+  printf("fin start\n");
   
   glutInit(&argc,argv);
   glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);

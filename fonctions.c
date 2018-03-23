@@ -13,7 +13,7 @@ void affichage(){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(100,(double)TAILLE_X/TAILLE_Y,0.1,100);
-  gluLookAt(0,-40,40,0,0,0,0,0,1);
+  gluLookAt(0,0,10,16,16,0,0,0,1);
   glRotatef(angle,0,0,1);
   trace_grille();
 
@@ -31,22 +31,30 @@ void affichage(){
 }
 
 void animer(){
-  angle += increment;
+  /* angle += increment;
   if(angle > 360)
     angle = 0;
+  */
+  increment = 0;
+  compteur += vitesse;
+  if(compteur > RAYON){
+    compteur = 0;
+    increment = RAYON;
+  }
+  
   
   switch(xD){
   case 0 :
-    xs+=vitesse;
+    xs+=increment;
     break;
   case 1 :
-    ys+=vitesse;
+    ys+=increment;
     break;
   case 2 :
-    xs-=vitesse;
+    xs-=increment;
     break;
   case 3 :
-    ys-=vitesse;
+    ys-=increment;
     break;
   }
   if(xD==0&&xs>=MAXX)
@@ -96,29 +104,37 @@ void trace_grille(){
 
 void affiche_snake(double x, double y, double z){
   int i,j;
-  for(i=0; i<2; i++){
+  for(i=2; i>0; i--){
     for(j=0; j<3; j++){
-      snake[i+1][j] = snake[i][j];
+      snake[i][j] = snake[i-1][j];
     }
   }
   snake[0][0] = x;
   snake[0][1] = y;
   snake[0][2] = z;
 
-  glColor3ub(255,0,0);
-  glTranslated(x,y,z);
-  glPushMatrix();
-  glutWireSphere(RAYON, 10, 10);
+  printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);
+  printf("sphere 2 : %lf %lf\n",snake[1][0],snake[1][1]);
+  printf("sphere 3 : %lf %lf\n",snake[2][0],snake[2][1]);
 
   
+
+  glColor3ub(255,0,0);
+  glPushMatrix();
+  glTranslated(x,y,z);
+  glutWireSphere(RAYON/2, 10, 10);
+
+  glPopMatrix();
+  glPushMatrix();
   glColor3ub(128,0,128);
-  glTranslated((snake[1][0]-snake[0][0])*4*RAYON,(snake[1][1]-snake[0][1])*4*RAYON,0);
-  glutWireSphere(RAYON, 10, 10);
+  glTranslated(snake[1][0],snake[1][1],0);
+  glutWireSphere(RAYON/2, 10, 10);
+
   glPopMatrix();
   glPushMatrix();
   glColor3ub(0,0,255);
-  glTranslated((snake[2][0]-snake[0][0])*4*RAYON,(snake[2][1]-snake[0][1])*4*RAYON,0);
-  glutWireSphere(RAYON, 10, 10);
+  glTranslated(snake[2][0],snake[2][1],0);
+  glutWireSphere(RAYON/2, 10, 10);
   glPopMatrix();
 }
 

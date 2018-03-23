@@ -1,4 +1,4 @@
-
+#include <stdio.h>
 
 #define PIXELS_X 600
 #define PIXELS_Y 600
@@ -9,10 +9,10 @@
  
 #define MAXX 32
 #define MAXY 32
-#define MINX -32
-#define MINY -32
+#define MINX 0
+#define MINY 0
 #define TAILLE_PIXEL 0.5
-#define RAYON 4
+#define RAYON 2
 
 int k,xC,yC,xD,yD;
 double xs,ys,zs;
@@ -20,6 +20,7 @@ double angle;
 double increment;
 double snake[3][3];
 double vitesse;
+double compteur;
 
 void affichage();
 void animer();

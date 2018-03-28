@@ -13,7 +13,8 @@ void affichage(){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluPerspective(100,(double)TAILLE_X/TAILLE_Y,0.1,100);
-  gluLookAt(16,0,16,16,16,0,0,0,1);
+  //gluLookAt(MAXX/2,-5,40,MAXX/2,0,0,0,0,1);
+  gluLookAt(xs,ys-5,20,xs,ys,0,0,0,1);
   glRotatef(angle,0,0,1);
   trace_grille();
 
@@ -21,10 +22,10 @@ void affichage(){
 
 
   affiche_snake(xs,ys,zs);
-  //maison(-2,-2,0,3);
-  /*
-  for(i=0; i < 10;i++)
-    maison(3*i,i,0,2.5);
+  /* for(i=MINX; i < MAXX;i++)
+    maison(3*i,0,0,3);
+  for(i=MINY; i < MAXY;i++)
+    maison(0,3*i,0,3);
   */
     
   glutSwapBuffers();
@@ -37,14 +38,14 @@ void animer(){
     angle = 0;
   */
   increment = 0;
-  compteur += vitesse;
+  compteur += 1;
   if(compteur > RAYON){
     compteur = 0;
     increment = RAYON;
   }
   
   
-  switch(xD){
+  switch(direction){
   case 0 :
     xs+=increment;
     break;
@@ -58,7 +59,7 @@ void animer(){
     ys-=increment;
     break;
   }
-  if(xD==0&&xs>=MAXX)
+  /* if(xD==0&&xs>=MAXX)
     xD++;
   if(xD==1&&ys>=MAXY)
     xD++;
@@ -66,11 +67,11 @@ void animer(){
     xD++;
   if(xD==3&&ys<=MINY)
     xD=0;
-
+  */
   if(increment>0){
-    for(i=2; i>0; i--){
+    for(i=TAILLE_MAX; i>0; i--){
       for(j=0; j<3; j++){
-	snake[i][j] = snake[i-1][j];
+	snake[i][j] += snake[i-1][j]-snake[i][j];
       }
     }
     snake[0][0] = xs;
@@ -87,8 +88,32 @@ void animer(){
 
 void clavier(unsigned char key, int x, int y){
   //increment = -increment;
-  pause();
+  //  pause();
   glutPostRedisplay();
+}
+
+
+void fleches(int key, int x, int y){
+  switch(key)
+    {
+      //les ifs servent à empecher de prendre la direction opposée à la direction courante
+    case GLUT_KEY_UP:
+      if(direction!=3)
+      direction = 1;
+      break;
+    case GLUT_KEY_DOWN:
+      if(direction!=1)
+      direction = 3;
+      break;
+    case GLUT_KEY_LEFT:
+      if(direction!=0)
+      direction = 2;
+      break;
+    case GLUT_KEY_RIGHT:
+      if(direction!=2)
+      direction = 0;
+      break;
+    }
 }
 
 
@@ -130,19 +155,16 @@ void affiche_snake(double x, double y, double z){
   glColor3ub(255,0,0);
   glPushMatrix();
   glTranslated(x,y,z);
-  glutWireSphere(RAYON/2, 10, 10);
+  glutSolidSphere(RAYON/2, 10, 10);
 
-  glPopMatrix();
-  glPushMatrix();
-  glColor3ub(128,0,128);
-  glTranslated(snake[1][0],snake[1][1],0);
-  glutWireSphere(RAYON/2, 10, 10);
+  for(i = 1; i <TAILLE_MAX;i++){
+    glPopMatrix();
+    glPushMatrix();
+    glColor3ub(128,(i*20)%255,128);
+    glTranslated(snake[i][0],snake[i][1],0);
+    glutSolidSphere(RAYON/2, 10, 10);
+  }
 
-  glPopMatrix();
-  glPushMatrix();
-  glColor3ub(0,0,255);
-  glTranslated(snake[2][0],snake[2][1],0);
-  glutWireSphere(RAYON/2, 10, 10);
   glPopMatrix();
 }
 

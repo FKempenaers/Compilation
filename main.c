@@ -5,12 +5,12 @@
 
 
 int main (int argc, char* argv[]){
-
+  
   k = angle = compteur = 0;
   increment = 0.25;
   vitesse = 0.10;
-  xD=0;
-  xs = MINX+RAYON*4;
+  direction = 0;
+  xs = MINX+RAYON*2;
   ys = MINY;
   zs = 0;
 
@@ -20,8 +20,11 @@ int main (int argc, char* argv[]){
   snake[1][2] = 0;
   snake[2][2] = 0;
 
-  snake[1][0] = MINX+RAYON*2;
-  snake[2][0] = MINX;
+  for(int i = 1; i <TAILLE_MAX;i++){
+    snake[i][0] = snake[i-1][0]-RAYON;
+    snake[i][1] = 0;
+    snake[i][2] = 0;
+  }
 
 
   printf("start\n");
@@ -41,6 +44,7 @@ int main (int argc, char* argv[]){
   glutDisplayFunc(affichage);
   glutKeyboardFunc(clavier);
   glutIdleFunc(animer);
+  glutSpecialFunc(fleches);
 
 
   glutMainLoop();

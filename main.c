@@ -16,12 +16,12 @@ int main (int argc, char* argv[]){
 
   snake[0][0] = xs;
   snake[0][1] = ys;
-  snake[0][2] = 0;
+  snake[0][2] = zs;
   snake[1][2] = 0;
   snake[2][2] = 0;
 
   for(int i = 1; i <TAILLE_MAX;i++){
-    snake[i][0] = snake[i-1][0]-RAYON;
+    snake[i][0] = snake[i-1][0]-RAYON*2;
     snake[i][1] = 0;
     snake[i][2] = 0;
   }

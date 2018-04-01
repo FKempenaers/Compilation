@@ -9,12 +9,12 @@
 
 #define TAILLE_MAX 10
  
-#define MAXX 100
-#define MAXY 100
+#define MAXX 300
+#define MAXY 300
 #define MINX 0
 #define MINY 0
 #define TAILLE_PIXEL 0.5
-#define RAYON 2
+#define RAYON 4
 
 int k,direction;
 double xs,ys,zs;

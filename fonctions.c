@@ -9,6 +9,24 @@ void affichage(){
   int i,j;
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_LIGHT0);
+  glEnable(GL_COLOR_MATERIAL);
+  glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE  );
+
+  glLightx(GL_LIGHT0,GL_POSITION,1,1,0);
+  glLightx(GL_LIGHT0,GL_AMBIENT,0,0,0,1);
+  glLightx(GL_LIGHT0,GL_DIFFUSE,1,1,1,1);
+  glLightx(GL_LIGHT0,GL_SPECULAR,1,1,1,1);
+
+  GLint white[] = {1,1,1,1};
+  glMaterialiv(GL_FRONT_AND_BACK,GL_SPECULAR,white);
+  GLint color[] = {0,0,0,1};
+  glMaterialiv(GL_FRONT_AND_BACK,GL_EMISSION,color);
+
+
+
+  
  
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -32,31 +50,40 @@ void affichage(){
 }
 
 void animer(){
-  int i,j;
+  int i,j,increment2;
   /* angle += increment;
   if(angle > 360)
     angle = 0;
   */
-  increment = 0;
-  compteur += 1;
+  increment2 = 0;
+  compteur++;
   if(compteur > RAYON*2){
     compteur = 0;
-    increment = RAYON*2;
+    increment2 = RAYON*2;
   }
+  /*
+  printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);
+  printf("sphere 2 : %lf %lf\n",snake[1][0],snake[1][1]);
+  printf("sphere 3 : %lf %lf\n",snake[2][0],snake[2][1]);
+  printf("compteur : %d\n",compteur);
+  printf("increment : %d\n",increment2);
+  */
+
+  
   
   
   switch(direction){
   case 0 :
-    xs+=increment;
+    xs+=increment2;
     break;
   case 1 :
-    ys+=increment;
+    ys+=increment2;
     break;
   case 2 :
-    xs-=increment;
+    xs-=increment2;
     break;
   case 3 :
-    ys-=increment;
+    ys-=increment2;
     break;
   }
   /* if(xD==0&&xs>=MAXX)
@@ -68,7 +95,7 @@ void animer(){
   if(xD==3&&ys<=MINY)
     xD=0;
   */
-  if(increment>0){
+  if(increment2>0){
     for(i=TAILLE_MAX; i>0; i--){
 	snake[i][0] = snake[i-1][0];//-snake[i][j];
 	snake[i][1] = snake[i-1][1];
@@ -144,13 +171,7 @@ void trace_grille(){
 
 void affiche_snake(double x, double y, double z){
   int i,j;
-
-  printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);
-  printf("sphere 2 : %lf %lf\n",snake[1][0],snake[1][1]);
-  printf("sphere 3 : %lf %lf\n",snake[2][0],snake[2][1]);
-  printf("compteur : %lf",compteur);
-  printf("increment : %lf",increment);
-  
+ 
 
   glColor3ub(255,0,0);
   glPushMatrix();

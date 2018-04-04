@@ -22,7 +22,7 @@ double angle;
 double increment;
 double snake[TAILLE_MAX][3];
 double vitesse;
-double compteur;
+int compteur;
 
 void affichage();
 void animer();

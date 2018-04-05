@@ -2,8 +2,8 @@
 #include <GL/glut.h>
 #include <GL/glu.h>
 #include <math.h>
-#include "fonctions.h"
-#include "point.h"
+#include "../inc/fonctions.h"
+#include "../inc/point.h"
 
 void affichage(){
   int i,j;

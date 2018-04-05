@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 #define PIXELS_X 1600

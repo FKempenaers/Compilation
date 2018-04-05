@@ -1,4 +1,4 @@
-#include "karbre.h"
+#include "../inc/karbre.h"
 #include <stdio.h>
 
 karbre kArbreVide(){

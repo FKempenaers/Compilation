@@ -1,11 +1,11 @@
 CC = gcc -Wall -O3
 
 projet : fonctions
-	$(CC) -o tp main.c fonctions.o -lGL -lGLU -lglut -lm
+	$(CC) -o bin/snake src/main.c obj/fonctions.o -lGL -lGLU -lglut -lm
 
-fonctions : fonctions.c fonctions.h
-	$(CC) -c fonctions.c -o fonctions.o -lGL -lGLU -lglut
+fonctions : src/fonctions.c inc/fonctions.h
+	$(CC) -c src/fonctions.c -o obj/fonctions.o -lGL -lGLU -lglut
 clean:
-	rm -f *.o *~ tp
+	rm -f obj/* src/*~ bin/snake
 
 

@@ -37,6 +37,7 @@ Détails de l'implémentation
 ***************************
 
 Entités :
+  - Position du serpent joueur en variable globale.
   - Les boules font une case de diamètre.
   - Le serpent du joueur doit faire AU MOINS 2 boules de longueur, sinon il meurt.
 
@@ -46,4 +47,4 @@ Carte :
   - Les murs ont une épaisseur, ie, ils ne prennent pas une case en entier lors de la visualisation MAIS ils sont codés sur toutes les cases de la carte qu'ils travèrsent.
  
  Ennemis :
-  - Tableau contenant toutes les boules composant les serpents ennemis.
+  - Tableau contenant toutes les boules composant les serpents ennemis, identificateur par serpent, en même temps que les coordonées en x et en y.

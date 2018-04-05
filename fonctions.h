@@ -27,3 +27,6 @@ void clavier(unsigned char key,int x, int y);
 void trace_grille();
 void affiche_snake(double x, double y, double z);
 void maison(double x, double y, double z, double c);
+void affiche_mur( int x1, int y1, int z1, int x2, int z2);
+void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2);
+void affiche_sol();

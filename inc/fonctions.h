@@ -9,6 +9,7 @@
 #define TAILLE_Y PIXELS_Y
 
 #define TAILLE_MAX 10
+#define PI 3.14159265
  
 #define MAXX 300
 #define MAXY 300
@@ -24,6 +25,7 @@ double increment;
 double snake[TAILLE_MAX][3];
 double vitesse;
 int compteur;
+int xSouris,ySouris;
 
 void affichage();
 void animer();
@@ -32,3 +34,5 @@ void fleches(int key, int x, int y);
 void trace_grille();
 void affiche_snake(double x, double y, double z);
 void maison(double x, double y, double z, double c);
+void init_snake();
+void anime_snake();

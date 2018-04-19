@@ -1,6 +1,7 @@
 #include <GL/gl.h>
 #include <GL/glut.h>
 #include <GL/glu.h>
+#include "SDL/SDL.h"
 #include <math.h>
 #include "../inc/fonctions.h"
 #include "../inc/point.h"
@@ -33,7 +34,7 @@ void affichage(){
   gluPerspective(100,(double)TAILLE_X/TAILLE_Y,0.1,100);
   //gluLookAt(MAXX/2,-20,40,MAXX/2,0,0,0,0,1);
   gluLookAt(xs,ys-5,20,xs,ys,0,0,0,1);
-  glRotatef(angle,0,0,1);
+  //glRotatef(angle,0,0,1);
   trace_grille();
 
   /*****************************/
@@ -45,12 +46,13 @@ void affichage(){
   for(i=MINY; i < MAXY;i++)
     maison(0,3*i,0,3);
   */
-    
-  glutSwapBuffers();
+  glFlush();
+  SDL_GL_SwapBuffers();
 }
 
 void animer(){
   int i,j,increment2;
+  
   /* angle += increment;
   if(angle > 360)
     angle = 0;
@@ -109,7 +111,7 @@ void animer(){
   
   
   
-    glutPostRedisplay();
+  // glutPostRedisplay();
 }
 
 void clavier(unsigned char key, int x, int y){
@@ -171,19 +173,21 @@ void trace_grille(){
 
 void affiche_snake(double x, double y, double z){
   int i,j;
+  GLUquadric* lol;
+  lol = gluNewQuadric();
  
 
   glColor3ub(255,0,0);
   glPushMatrix();
   glTranslated(snake[0][0],snake[0][1],z);
-  glutSolidSphere(RAYON, 10, 10);
+  gluSphere(lol, RAYON, 10,10);
 
   for(i = 1; i <TAILLE_MAX;i++){
     glPopMatrix();
     glPushMatrix();
     glColor3ub(128,(i*20)%255,128);
     glTranslated(snake[i][0],snake[i][1],snake[i][2]);
-    glutSolidSphere(RAYON, 10, 10);
+    gluSphere(lol,RAYON, 10,10);
   }
 
   glPopMatrix();
@@ -224,4 +228,65 @@ void maison(double x, double y, double z, double c){
   glVertex3d(x,y+c,z+c);
   
   glEnd();
+}
+
+void init_snake(){
+   k = angle = compteur = 0;
+  increment = 0.25;
+  vitesse = 0.10;
+  direction = 0;
+  xs = MINX+RAYON*2;
+  ys = MINY;
+  zs = RAYON;
+
+  snake[0][0] = xs;
+  snake[0][1] = ys;
+  snake[0][2] = zs;
+
+  for(int i = 1; i <TAILLE_MAX;i++){
+    snake[i][0] = snake[i-1][0]-RAYON*2;
+    snake[i][1] = 0;
+    snake[i][2] = RAYON;
+  }
+}
+
+void anime_snake(){
+  int i,timer;
+  int xO,yO,xM,yM;
+  int xU,yU,xV,yV;
+  SDL_GetMouseState(&xSouris,&ySouris);
+
+  /*calculer le vecteur entre milieu écran et position curseur
+    en déduire l'angle par rapport à l'horizontale
+    déplacer le snake en le faisant tourner
+
+soit A le point du curseur
+On veut calculer les vecteurs OA (u)  et OM (v) et trouver l'angle*/
+  /*
+  xO = TAILLE_X/2;
+  yO = TAILLE_Y/2;
+  xM = TAILLE_X/2;
+  yM = 0;
+
+  xU = xSouris-xO;
+  yU = ySouris-yO;
+  xV = xM-xO;
+  yV = yM-yO;
+  
+  angle = acos( (xU*xV+yU*yV)/(sqrt(xU*xU+yU*yU)*sqrt(xV*xV+yV*yV)) );
+  printf("angle : %lf",angle*180/PI);
+  */
+  xs += RAYON*2*sin(angle);
+  ys += RAYON*2*cos(angle);
+
+  for(i=TAILLE_MAX; i>0; i--){
+    snake[i][0] = snake[i-1][0];//-snake[i][j];
+    snake[i][1] = snake[i-1][1];
+  }
+  snake[0][0] = xs;
+  snake[0][1] = ys;
+  snake[0][2] = zs;
+
+  for(timer = 0;timer <500;timer++);
+  printf("x= %d, y= %d\n",xSouris,ySouris);
 }

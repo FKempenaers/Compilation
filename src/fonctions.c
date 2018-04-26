@@ -38,6 +38,12 @@ void affichage(){
   trace_grille();
 
   /*****************************/
+  
+  if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
+  if(genCarteOK == 0){
+    gencarte(6);
+    genCarteOK = 1;
+  }
   affiche_carte(carte,6);
   affiche_snake(xs,ys,zs);
 

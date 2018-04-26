@@ -24,7 +24,9 @@ void affichage(){
   glMaterialiv(GL_FRONT_AND_BACK,GL_SPECULAR,white);
   GLint color[] = {0,0,0,1};
   glMaterialiv(GL_FRONT_AND_BACK,GL_EMISSION,color);
-
+  
+  int LightPos[4] = {0,0,3,1};
+  glLightiv(GL_LIGHT0,GL_POSITION,LightPos);
 
 
   

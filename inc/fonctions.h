@@ -18,7 +18,7 @@
 #define MINX 0
 #define MINY 0
 #define TAILLE_PIXEL 0.5
-#define RAYON 4
+#define RAYON 1
 
 int k,direction;
 double xs,ys,zs;

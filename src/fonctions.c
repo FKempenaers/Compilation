@@ -43,10 +43,10 @@ void affichage(){
   
   if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
   if(genCarteOK == 0){
-    gencarte(6);
+    gencarte(10);
     genCarteOK = 1;
   }
-  affiche_carte(carte,6);
+  affiche_carte(carte,10);
   affiche_snake(xs,ys,zs);
 
   affiche_snake(xs,ys,zs);
@@ -274,14 +274,14 @@ void affiche_sol(){
     mi*=2;
     mi-=10;
   }
-  affiche_cube(MINX,MINY,0,MAXX-20,MAXY,1);
-  affiche_cube(MAXX,MINY,0,MAXX-20,MAXY-10,1);
+  affiche_cube(MINX,MINY,0,MAXX-20,MAXY,1,0.8);
+  affiche_cube(MAXX,MINY,0,MAXX-20,MAXY-10,1,0.8);
   affiche_pente(MINX + 5, MINY , 1,MINX+20,MINY+10,10);
   affiche_pente(MAXX - 5, MAXY, -10,MAXX-20,MAXY-10,1);
 }
 
 void affiche_mur( int x1, int y1, int z1, int x2,int y2, int z2){
-    affiche_cube(x1-1,y1-1,z1,x2+1,y2+1,z2);
+  affiche_cube(x1-1,y1-1,z1,x2+1,y2+1,z2,0.3);
 }
 
 void affiche_pente(int x1, int y1, int z1, int x2,int y2, int z2){
@@ -294,7 +294,7 @@ void affiche_pente(int x1, int y1, int z1, int x2,int y2, int z2){
   glEnd();
 }
 
-void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2){
+void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
   glBegin(GL_QUADS);
   glColor3f(0.9, 0.9, 0.9);
@@ -320,7 +320,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2){
   glEnd();
 
   glBegin(GL_QUADS);
-  glColor3f(0.6, 0, 0.6);
+  glColor3f(color, 0, color);
   glVertex3f(x1, y1, z2);
   glVertex3f(x2, y1, z2);
   glVertex3f(x2, y2, z2);

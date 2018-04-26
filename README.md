@@ -48,3 +48,11 @@ Carte :
  
  Ennemis :
   - Tableau contenant toutes les boules composant les serpents ennemis, identificateur par serpent, en même temps que les coordonées en x et en y.
+
+
+Collisions :
+
+carte en 2D : Tableau 2D de structures element.
+1er champ : VIDE OU TEST.
+    si vide tout va bien on peut y aller
+    si test on a l'eq du mur avec lequel on doit tester l'intersection

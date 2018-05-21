@@ -16,7 +16,7 @@ void affiche_sol(){
     mi-=10;
   }
   affiche_cube_sol(MINX,MINY,0,MAXX-20,MAXY,1,0.8);
-  affiche_cube(MAXX,MINY,0,MAXX-20,MAXY-10,1,0.8);
+  affiche_cube_sol(MAXX,MINY,0,MAXX-20,MAXY-10,1,0.8);
   affiche_pente(MINX + 5, MINY , 1,MINX+20,MINY+10,10);
   affiche_pente(MAXX - 5, MAXY, -10,MAXX-20,MAXY-10,1);
 }
@@ -91,7 +91,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
   x4 = x2 - 1;
   y3 = y1 + 1;
   y4 = y2 - 1;
-  
+  Bresenham_enti(x1,y1,x2,y2);
   x1--;
   y1--;
   x2++;
@@ -195,8 +195,7 @@ void gencarte(int n){
       carte[1][i] -= MINX;
       carte[2][i] -= MINX;
       carte[3][i] -= MINX;
-    }
-    Bresenham_enti(carte[0][i],carte[1][i],carte[2][i],carte[3][i]);
+    }    
   }
   int j;
   for(i = MINX; i < MAXX;i++){

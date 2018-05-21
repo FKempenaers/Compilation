@@ -164,9 +164,22 @@ void gencarte(int n){
   else dim = MAXX-MINX;
   
   carte[0][0] = MINX+1; carte[1][0] = MINY+1; carte[2][0] = MINX+1; carte[3][0] = MAXY-1;
+  trace_segment_bresenInt(carte[0][0],carte[1][0],carte[2][0],carte[3][0]);
   carte[0][1] = MINX+1; carte[1][1] = MAXY-1; carte[2][1] = MAXX-1; carte[3][1] = MAXY-1;
+  trace_segment_bresenInt(carte[0][1],carte[1][1],carte[2][1],carte[3][1]);
   carte[0][2] = MAXX-1; carte[1][2] = MAXY-1; carte[2][2] = MAXX-1; carte[3][2] = MINY+1;
+  trace_segment_bresenInt(carte[0][2],carte[1][2],carte[2][2],carte[3][2]);
   carte[0][3] = MAXX-1; carte[1][3] = MINY+1; carte[2][3] = MINX+1; carte[3][3] = MINY+1;
+  trace_segment_bresenInt(carte[0][3],carte[1][3],carte[2][3],carte[3][3]);
+  for(ii = 0; ii < MAXY;ii++){
+    for(jj = 0;jj < MAXX;jj++){
+      if(carteT[ii][jj] == 2){
+	printf("%d %d|",ii,jj);
+	carteT[ii][jj] = 1;
+      }
+      printf("!!!");
+    }
+  }
 
   for(i = 4; i < n;i++){
     carte[0][i] = rand()%dim;
@@ -194,7 +207,7 @@ void gencarte(int n){
       carte[3][i] -= MINX;
     }
      
-    if(trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i])){
+    if(trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i]) == 1){
       for(ii = 0; ii < MAXY;ii++){
 	for(jj = 0;jj < MAXX;jj++){
 	  if(carteT[ii][jj] == 2){
@@ -209,6 +222,13 @@ void gencarte(int n){
       }
     }
   }
+  /*for(ii = 0; ii < MAXY;ii++){
+    for(jj = 0;jj < MAXX;jj++){
+      printf("%d ", carteT[ii][jj]);
+    }
+    printf("\n");
+  }
+  printf("fin\n");*/
 }
 int trace_point2(int x,int y){
   if(carteT[x][y] != 1){

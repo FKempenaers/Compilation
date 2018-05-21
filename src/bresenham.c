@@ -36,7 +36,7 @@ int trace_seg_bres1(int x1, int y1, int x2, int y2, int dx, int dy){
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x <= x2; x++){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += 2*dy;
@@ -50,7 +50,7 @@ int trace_seg_bres1(int x1, int y1, int x2, int y2, int dx, int dy){
     erreur = -dy;
     //second octant
     for(y = y1; y <= y2; y++){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += (2*dx);
@@ -70,7 +70,7 @@ int trace_seg_bres2(int x1, int y1, int x2, int y2, int dx, int dy){
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x >= x2; x--){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += 2*dy;
@@ -83,7 +83,7 @@ int trace_seg_bres2(int x1, int y1, int x2, int y2, int dx, int dy){
   else{
     erreur = -dy;
     for(y = y1; y <= y2; y++){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += 2*dx;
@@ -104,7 +104,9 @@ int trace_seg_bres3(int x1, int y1, int x2, int y2, int dx, int dy){
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x >= x2; x--){
-      trace_point2(x,y);
+      if(trace_point2(x,y) == 0){
+	return 0;
+      }
       erreur += 2*dy;
       if(erreur>=0){
 	y--;
@@ -115,7 +117,7 @@ int trace_seg_bres3(int x1, int y1, int x2, int y2, int dx, int dy){
   else{
     erreur = -dy;
     for(y = y1; y >= y2; y--){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += 2*dx;
@@ -136,7 +138,7 @@ int trace_seg_bres4(int x1, int y1, int x2, int y2, int dx, int dy){
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x <= x2; x++){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += 2*dy;
@@ -149,7 +151,7 @@ int trace_seg_bres4(int x1, int y1, int x2, int y2, int dx, int dy){
   else{
     erreur = -dy;
     for(y = y1; y >= y2; y--){
-      if(trace_point2(x,y)){
+      if(trace_point2(x,y) == 0){
 	return 0;
       }
       erreur += 2*dx;

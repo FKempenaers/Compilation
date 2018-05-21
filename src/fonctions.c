@@ -55,8 +55,10 @@ void affichage(){
 
   /*******************************************************************************/
   /*Partie 2D*/
+  
   // glDisable(GL_DEPTH_TEST);
   //glDepthMask(GL_FALSE);
+  glDisable(GL_LIGHTING);
 
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -308,9 +310,6 @@ On veut calculer les vecteurs OA (u)  et OM (v) et trouver l'angle*/
   snake[0][0] = xs;
   snake[0][1] = ys;
   snake[0][2] = zs;
-
-  for(timer = 0;timer <500;timer++);
-  printf("x= %d, y= %d\n",xSouris,ySouris);
 }
 
 

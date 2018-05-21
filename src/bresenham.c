@@ -1,6 +1,6 @@
 #include "../inc/bresenham.h"
 
-void trace_segment_bresenInt(int x1, int y1, int x2, int y2){
+int trace_segment_bresenInt(int x1, int y1, int x2, int y2){
   int deltaX = x2-x1;
   int deltaY = y2-y1;
   //on force des deltas positifs
@@ -11,32 +11,34 @@ void trace_segment_bresenInt(int x1, int y1, int x2, int y2){
   /****************************************************************************/
   //premier quadrant
   if(x1<=x2 && y1<=y2){
-    trace_seg_bres1(x1, y1, x2, y2, deltaX, deltaY);
+    return trace_seg_bres1(x1, y1, x2, y2, deltaX, deltaY);
   }
   //second quadrant
   if(x1>x2 && y1<y2){
-    trace_seg_bres2(x1, y1, x2, y2, deltaX, deltaY);
+    return trace_seg_bres2(x1, y1, x2, y2, deltaX, deltaY);
   }
   //troisieme quadrant
   if(x1>x2 && y1>y2){
-    trace_seg_bres3(x1, y1, x2, y2, deltaX, deltaY);
+    return trace_seg_bres3(x1, y1, x2, y2, deltaX, deltaY);
   }
   //troisieme quadrant
   if(x1<x2 && y1>y2){
-    trace_seg_bres4(x1, y1, x2, y2, deltaX, deltaY);
+    return trace_seg_bres4(x1, y1, x2, y2, deltaX, deltaY);
   }
   /******************************************************************************/
 
 }
 
-void trace_seg_bres1(int x1, int y1, int x2, int y2, int dx, int dy){
+int trace_seg_bres1(int x1, int y1, int x2, int y2, int dx, int dy){
   int erreur,x,y;
   x = x1;
   y = y1;
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x <= x2; x++){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += 2*dy;
       if(erreur>=0){
 	y++;
@@ -48,7 +50,9 @@ void trace_seg_bres1(int x1, int y1, int x2, int y2, int dx, int dy){
     erreur = -dy;
     //second octant
     for(y = y1; y <= y2; y++){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += (2*dx);
       if(erreur>=0){
 	x++;
@@ -56,16 +60,19 @@ void trace_seg_bres1(int x1, int y1, int x2, int y2, int dx, int dy){
       }
     }
   }
+  return 1;
 }
 
-void trace_seg_bres2(int x1, int y1, int x2, int y2, int dx, int dy){
+int trace_seg_bres2(int x1, int y1, int x2, int y2, int dx, int dy){
   int erreur,x,y;
   x = x1;
   y = y1;
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x >= x2; x--){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += 2*dy;
       if(erreur>=0){
 	y++;
@@ -76,7 +83,9 @@ void trace_seg_bres2(int x1, int y1, int x2, int y2, int dx, int dy){
   else{
     erreur = -dy;
     for(y = y1; y <= y2; y++){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += 2*dx;
       if(erreur>=0){
 	x--;
@@ -85,9 +94,10 @@ void trace_seg_bres2(int x1, int y1, int x2, int y2, int dx, int dy){
     }
       
   }
+  return 1;
 }
 
-void trace_seg_bres3(int x1, int y1, int x2, int y2, int dx, int dy){
+int trace_seg_bres3(int x1, int y1, int x2, int y2, int dx, int dy){
   int erreur,x,y;
   x = x1;
   y = y1;
@@ -105,7 +115,9 @@ void trace_seg_bres3(int x1, int y1, int x2, int y2, int dx, int dy){
   else{
     erreur = -dy;
     for(y = y1; y >= y2; y--){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += 2*dx;
       if(erreur>=0){
 	x--;
@@ -114,16 +126,19 @@ void trace_seg_bres3(int x1, int y1, int x2, int y2, int dx, int dy){
     }
       
   }
+  return 1;
 }
 
-void trace_seg_bres4(int x1, int y1, int x2, int y2, int dx, int dy){
+int trace_seg_bres4(int x1, int y1, int x2, int y2, int dx, int dy){
   int erreur,x,y;
   x = x1;
   y = y1;
   if(dx >= dy){
     erreur = -dx;
     for(x = x1; x <= x2; x++){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += 2*dy;
       if(erreur>=0){
 	y--;
@@ -134,7 +149,9 @@ void trace_seg_bres4(int x1, int y1, int x2, int y2, int dx, int dy){
   else{
     erreur = -dy;
     for(y = y1; y >= y2; y--){
-      trace_point2(x,y);
+      if(trace_point2(x,y)){
+	return 0;
+      }
       erreur += 2*dx;
       if(erreur>=0){
 	x++;
@@ -143,4 +160,5 @@ void trace_seg_bres4(int x1, int y1, int x2, int y2, int dx, int dy){
     }
       
   }
+  return 1;
 }

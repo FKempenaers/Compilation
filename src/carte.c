@@ -193,75 +193,25 @@ void gencarte(int n){
       carte[2][i] -= MINX;
       carte[3][i] -= MINX;
     }
-    printf("test1\n");
-    trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i]);
-    printf("test2\n");
-    
-    /*if(Bresenham_enti(carte[0][i],carte[1][i],carte[2][i],carte[3][i])){
+     
+    if(trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i])){
       for(ii = 0; ii < MAXY;ii++){
 	for(jj = 0;jj < MAXX;jj++){
 	  if(carteT[ii][jj] == 2){
 	    carteT[ii][jj] = 1;
 	  }
 	}
-	}
+      }
     }
     else{
       if(i > 4){
 	i--;
       }
     }
-    printf("test2\n");*/
   }
 }
-
-/*int Bresenham_enti(int x1, int y1, int x2, int y2){
-  int x,y;
-  int ax = x2 - x1;
-  int ay = y2 - y1;
-  int erreur = ax*(-1);
-
-  if(x1 > x2){
-    ay = y2;
-    y2 = y1;
-    y1 = ay;
-    ay = y2 - y1;
-    ax = x2;
-    x2 = x1;
-    x1 = ax;
-    ax = x2-x1;
-    erreur = ax*(-1);
-  }
-  
-  if(y2 > y1){
-    for(x = x1, y = y1; x <= x2; x++){
-      if(trace_point2(x,y) == 0){
-	return 0;
-      }
-      erreur += (2*ay);
-      if(erreur >= 0){
-	y++;
-	erreur -= (2*ax);
-      }
-    }
-  }
-  else{
-    for(x = x1, y = y1; x <= x2; x++){
-      if(trace_point2(x,y) == 0){
-	return 0;
-      }
-      erreur += (2*ay);
-      if(erreur <= 0){
-	y--;
-	erreur += (2*ax);
-      }
-    }
-  }
-  
-  }*/
 int trace_point2(int x,int y){
-  printf("test3\n");
-  if(carte[x][y] == 0){
+  if(carteT[x][y] == 0){
     carteT[x][y] = 2;
     if(x+1 < MAXX){
       carteT[x+1][y] = 2;
@@ -287,9 +237,7 @@ int trace_point2(int x,int y){
 	carteT[x-1][y-1] = 2;
       }
     }
-    printf("test4\n");
     return 1;
   }
-  printf("test5\n");
   return 0;
 }

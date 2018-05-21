@@ -216,8 +216,8 @@ void gencarte(int n){
     }
      
     if(trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i]) == 1){
-      for(ii = 0; ii < MAXY;ii++){
-	for(jj = 0;jj < MAXX;jj++){
+      for(ii = MINX; ii < MAXY;ii++){
+	for(jj = MINY;jj < MAXX;jj++){
 	  if(carteT[ii][jj] == 2){
 	    carteT[ii][jj] = 1;
 	  }
@@ -225,72 +225,88 @@ void gencarte(int n){
       }
     }
     else{
-      if(i > 4){
-	i--;
-      }
+      i--;
     }
   }
 }
-int trace_point2(int x,int y){
+
+int est_pas_entoure(int x,int y){
   if(carteT[x][y] != 1){
-    carteT[x][y] = 2;
-    if(x+1 < MAXX){
-      carteT[x+1][y] = 2;
-      if(x+2 < MAXX){
-	carteT[x+2][y] = 2;
+    if(x+1 < MAXX ){
+      if(carteT[x+1][y] == 1){
+	return 0;
       }
     }
     if(x-1 > MINX){
-      carteT[x-1][y] = 2;
-      if(x-2 > MINX){
-	carteT[x-2][y] = 2;
+      if(carteT[x-1][y] == 1){
+	return 0;
       }
     }
     if(y+1 < MAXY){
-      carteT[x][y+1] = 2;
-      if(y+2 < MAXY){
-	carteT[x][y+2] = 2;
+      if(carteT[x][y+1] == 1){
+	return 0;
       }
       if(x+1 < MAXX){
-	carteT[x+1][y+1] = 2;
-	 if(y+2 < MAXY){
-	    if(x+2 < MAXX){
-	      carteT[x+2][y+2] = 2;
-	    }
-	 }
-      }
-      if(x-1 > MINX){
-	carteT[x-1][y+1] = 2;
-	if(y+2 < MAXY){
-	    if(x-2 > MINX){
-	      carteT[x-2][y+2] = 2;
-	    }
-	 }
-      }
-    }
-    if(y-1 > MINY){
-      carteT[x][y-1] = 2;
-      if(y-2 > MINY){
-	carteT[x][y-2] = 2;
-      }
-      if(x+1 < MAXX){
-	carteT[x+1][y-1] = 2;
-	if(y-2 > MINY){
-	 if(x+2 < MAXX){
-	   carteT[x+2][y-2] = 2;
-	 }
+	if(carteT[x+1][y+1] == 1){
+	  return 0;
 	}
       }
       if(x-1 > MINX){
-	carteT[x-1][y-1] = 2;
-	if(y-2 > MINY){
-	 if(x-2 > MINX){
-	   carteT[x-2][y-2] = 2;
-	 }
+	if(carteT[x-1][y+1] == 1){
+	  return 0;
+	}
+      }
+    }
+    if(y-1 > MINY){
+      if( carteT[x][y-1] == 1){
+        return 0;
+      }
+     
+      if(x+1 < MAXX){
+	if(carteT[x+1][y-1] == 1){
+	  return 0;
+	}
+      }
+      if(x-1 > MINX){
+	if(carteT[x-1][y-1] == 1){
+	  return 0;
 	}
       }
     }
     return 1;
   }
   return 0;
+}
+
+
+int trace_point2(int x,int y){
+  if (est_pas_entoure(x,y) == 1){
+    carteT[x][y] = 2;
+    if(x+1 < MAXX ){
+      carteT[x+1][y] = 2;
+    }
+    if(x-1 > MINX){ 
+      carteT[x-1][y] = 2; 
+    }
+    if(y+1 < MAXY){
+      carteT[x][y+1] = 2;
+      if(x+1 < MAXX){
+	carteT[x+1][y+1] = 2;
+      }
+      if(x-1 > MINX){
+	carteT[x-1][y+1] = 2;
+      }
+    }
+    if(y-1 > MINY){
+      carteT[x][y-1] = 2;
+      if(x+1 < MAXX){
+	carteT[x+1][y-1] = 2;
+      }
+      if(x-1 > MINX){
+	carteT[x-1][y-1] = 2;
+      }
+    }
+    return 1;
+  }
+  else return 0;
 }

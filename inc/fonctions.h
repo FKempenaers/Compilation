@@ -31,8 +31,7 @@ double snake[TAILLE_MAX][3];
 double vitesse;
 int compteur;
 int xSouris,ySouris;
-int **carte;
-int genCarteOK;
+
 
 void affichage();
 void animer();

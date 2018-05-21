@@ -6,8 +6,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-#define PIXELS_X 1600
-#define PIXELS_Y 900
+#define PIXELS_X 1300
+#define PIXELS_Y 700
 #define RATIO = PIXELS_X/PIXELS_Y
 
 #define TAILLE_X PIXELS_X

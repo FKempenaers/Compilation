@@ -1,4 +1,4 @@
-#include "../inc/cate.h"
+#include "../inc/carte.h"
 
 void affiche_carte(int *carte[4],int x){
   int i;

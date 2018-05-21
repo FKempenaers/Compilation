@@ -99,9 +99,12 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
 void gencarte(int n){
   srand(getpid());
-  /*int **carte,*/
   int i,res;
   int dim;
+  carteT = (int**) malloc(sizeof(int*)*(MAXY-MINY));
+  for(i = 0;i < (MAXX-MINX);i++){
+    carteT[i] = (int*)calloc((MAXY-MINY),sizeof(int));
+  }
   carte = (int**) malloc(sizeof(int*)*4);
   for(i=0; i  < 4 ; i ++){
     carte[i] = (int*)malloc(sizeof(int)*n);
@@ -110,7 +113,6 @@ void gencarte(int n){
       exit (-1);
     }
   }
-
   if(MINX < 0) dim = (MINX*-1)+MAXX;
   else if(MINX == 0) dim = MAXX;
   else dim = MAXX-MINX;
@@ -145,8 +147,58 @@ void gencarte(int n){
       carte[2][i] -= MINX;
       carte[3][i] -= MINX;
     }
+    Bresenham_enti(carte[0][i],carte[1][i],carte[2][i],carte[3][i]);
   }
+  int j;
+  printf("ici!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  for(i = MINX; i < MAXX;i++){
+    for(j=MINY;j<MAXY;j++){
+      printf("%d ",carteT[i][j]);
+    }
+    printf("\n");
+  }
+}
 
-  //return carte;
+void Bresenham_enti(int x1, int y1, int x2, int y2){
+  int x,y;
+  int ax = x2 - x1;
+  int ay = y2 - y1;
+  int erreur = ax*(-1);
+
+  if(x1 > x2){
+    ay = y2;
+    y2 = y1;
+    y1 = ay;
+    ay = y2 - y1;
+    ax = x2;
+    x2 = x1;
+    x1 = ax;
+    ax = x2-x1;
+    erreur = ax*(-1);
+  }
   
+  if(y2 > y1){
+    for(x = x1, y = y1; x <= x2; x++){
+      trace_point2(x,y);
+      erreur += (2*ay);
+      if(erreur >= 0){
+	y++;
+	erreur -= (2*ax);
+      }
+    }
+  }
+  else{
+    for(x = x1, y = y1; x <= x2; x++){
+      trace_point2(x,y);
+      erreur += (2*ay);
+      if(erreur <= 0){
+	y--;
+	erreur += (2*ax);
+      }
+    }
+  }
+  
+}
+void trace_point2(int x,int y){
+  carteT[x][y] = 1;
 }

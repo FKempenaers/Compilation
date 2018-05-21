@@ -86,23 +86,33 @@ void affiche_cube_sol(int  x1, int y1, int z1, int x2,int y2, int z2,double colo
 
 void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
-  int x3,x4,y3,y4,i,j;
-  x3 = x1 + 1;
-  x4 = x2 + 1;
-  y3 = y1;
-  y4 = y2;
-  x1--;
-  x2--;
+  int x3,x4,y3,y4;
+  if((x1 - x2)^2 <= (y1 - y2)^2){
+    x3 = x1 + 1;
+    x4 = x2 + 1;
+    y3 = y1;
+    y4 = y2;
+    x1--;
+    x2--;
+  }
+  else{
+    x3 = x1;
+    x4 = x2;
+    y3 = y1 + 1;
+    y4 = y2 + 1;
+    y1--;
+    y2--;
+  }
   
   glBegin(GL_QUADS);
-  glColor3f(0.9, 0.9, 0.9);
+  glColor3f(0, 0, 0);
   glVertex3f(x1, y1, z1);
   glVertex3f(x2, y2, z1);
   glVertex3f(x4, y4, z1);
   glVertex3f(x3, y3, z1);
   glEnd();
   glBegin(GL_QUADS);
-  glColor3f(0, 0.8, 0.8);
+  glColor3f(1, 1,1);
   glVertex3f(x1, y1, z1);
   glVertex3f(x1, y1, z2);
   glVertex3f(x2, y2, z2);
@@ -118,7 +128,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
   glEnd();
 
   glBegin(GL_QUADS);
-  glColor3f(color, 0, color);
+  glColor3f(1, 1, 1);
   glVertex3f(x3, y3, z1);
   glVertex3f(x4, y4, z1);
   glVertex3f(x4, y4, z2);
@@ -126,7 +136,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
   glEnd();
   
   glBegin(GL_QUADS);
-  glColor3f(0, 0.3, 0.6);
+  glColor3f(0, 0, 0);
   glVertex3f(x1, y1, z2);
   glVertex3f(x3, y3, z2);
   glVertex3f(x4, y4, z2);
@@ -134,7 +144,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
   glEnd();
 
   glBegin(GL_QUADS);
-  glColor3f(0.4, 0.4, 0.4);
+  glColor3f(0.7, 0.7, 0);
   glVertex3f(x2, y2, z1);
   glVertex3f(x4, y4, z1);
   glVertex3f(x4, y4, z2);
@@ -226,26 +236,58 @@ int trace_point2(int x,int y){
     carteT[x][y] = 2;
     if(x+1 < MAXX){
       carteT[x+1][y] = 2;
+      if(x+2 < MAXX){
+	carteT[x+2][y] = 2;
+      }
     }
     if(x-1 > MINX){
       carteT[x-1][y] = 2;
+      if(x-2 > MINX){
+	carteT[x-2][y] = 2;
+      }
     }
     if(y+1 < MAXY){
       carteT[x][y+1] = 2;
+      if(y+2 < MAXY){
+	carteT[x][y+2] = 2;
+      }
       if(x+1 < MAXX){
 	carteT[x+1][y+1] = 2;
+	 if(y+2 < MAXY){
+	    if(x+2 < MAXX){
+	      carteT[x+2][y+2] = 2;
+	    }
+	 }
       }
       if(x-1 > MINX){
 	carteT[x-1][y+1] = 2;
+	if(y+2 < MAXY){
+	    if(x-2 > MINX){
+	      carteT[x-2][y+2] = 2;
+	    }
+	 }
       }
     }
     if(y-1 > MINY){
       carteT[x][y-1] = 2;
+      if(y-2 > MINY){
+	carteT[x][y-2] = 2;
+      }
       if(x+1 < MAXX){
 	carteT[x+1][y-1] = 2;
+	if(y-2 > MINY){
+	 if(x+2 < MAXX){
+	   carteT[x+2][y-2] = 2;
+	 }
+	}
       }
       if(x-1 > MINX){
 	carteT[x-1][y-1] = 2;
+	if(y-2 > MINY){
+	 if(x-2 > MINX){
+	   carteT[x-2][y-2] = 2;
+	 }
+	}
       }
     }
     return 1;

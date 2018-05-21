@@ -11,13 +11,14 @@ int main (int argc, char* argv[]){
 
   SDL_Event event;
   Uint32 last_time = SDL_GetTicks();
-    Uint32 current_time,ellapsed_time;
-    Uint32 start_time;
+  Uint32 current_time,ellapsed_time;
+  Uint32 start_time;
+  SDL_Surface *ecran = NULL;
 
   SDL_Init(SDL_INIT_VIDEO);
   atexit(SDL_Quit);
   SDL_WM_SetCaption("SnakeVSold",NULL);
-  SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
+  ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
 
   for (;;)
     {
@@ -40,12 +41,12 @@ int main (int argc, char* argv[]){
         }
       affichage();
       anime_snake();
-
+      
       ellapsed_time = SDL_GetTicks() - start_time;
 
       if (ellapsed_time < 100){
-	  SDL_Delay(100 - ellapsed_time);
-        }
+	SDL_Delay(100 - ellapsed_time);
+      }
     }
 
   return 0;

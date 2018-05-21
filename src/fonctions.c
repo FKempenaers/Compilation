@@ -6,6 +6,7 @@
 #include "../inc/fonctions.h"
 #include "../inc/point.h"
 #include "../inc/carte.h"
+#include "../inc/minimap.h"
 
 void affichage(){
   int i,j;
@@ -50,12 +51,22 @@ void affichage(){
   affiche_carte(carte,10);
   affiche_snake(xs,ys,zs);
 
-  affiche_snake(xs,ys,zs);
-  /* for(i=MINX; i < MAXX;i++)
-    maison(3*i,0,0,3);
-  for(i=MINY; i < MAXY;i++)
-    maison(0,3*i,0,3);
-  */
+
+
+  /*******************************************************************************/
+  /*Partie 2D*/
+  // glDisable(GL_DEPTH_TEST);
+  //glDepthMask(GL_FALSE);
+
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluOrtho2D(0, TAILLE_X, 0, TAILLE_Y);
+
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  affiche_minimap();
+  
   glFlush();
   SDL_GL_SwapBuffers();
 }

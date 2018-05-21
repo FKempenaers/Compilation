@@ -88,60 +88,58 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
   int x3,x4,y3,y4;
   x3 = x1 + 1;
-  x4 = x2 - 1;
-  y3 = y1 + 1;
-  y4 = y2 - 1;
+  x4 = x2 + 1;
+  y3 = y1;
+  y4 = y2;
   Bresenham_enti(x1,y1,x2,y2);
   x1--;
-  y1--;
-  x2++;
-  y2++;
+  x2--;
   
   glBegin(GL_QUADS);
   glColor3f(0.9, 0.9, 0.9);
   glVertex3f(x1, y1, z1);
   glVertex3f(x2, y2, z1);
-  glVertex3f(x3, y3, z2);
-  glVertex3f(x4, y4, z2);
+  glVertex3f(x4, y4, z1);
+  glVertex3f(x3, y3, z1);
   glEnd();
   glBegin(GL_QUADS);
   glColor3f(0, 0.8, 0.8);
   glVertex3f(x1, y1, z1);
-  glVertex3f(x3, y3, z2);
+  glVertex3f(x1, y1, z2);
   glVertex3f(x2, y2, z2);
-  glVertex3f(x4, y4, z1);
+  glVertex3f(x2, y2, z1);
   glEnd();
   
   glBegin(GL_QUADS);
   glColor3f(0.7, 0.7, 0);
   glVertex3f(x1, y1, z1);
   glVertex3f(x3, y3, z1);
-  glVertex3f(x2, y2, z1);
-  glVertex3f(x4, y4, z1);
+  glVertex3f(x3, y3, z2);
+  glVertex3f(x1, y1, z2);
   glEnd();
 
   glBegin(GL_QUADS);
   glColor3f(color, 0, color);
-  glVertex3f(x1, y1, z2);
-  glVertex3f(x3, y3, z2);
-  glVertex3f(x2, y2, z2);
+  glVertex3f(x3, y3, z1);
+  glVertex3f(x4, y4, z1);
   glVertex3f(x4, y4, z2);
+  glVertex3f(x3, y3, z2);
   glEnd();
   
   glBegin(GL_QUADS);
   glColor3f(0, 0.3, 0.6);
-  glVertex3f(x1, y1, z1);
+  glVertex3f(x1, y1, z2);
   glVertex3f(x3, y3, z2);
+  glVertex3f(x4, y4, z2);
   glVertex3f(x2, y2, z2);
-  glVertex3f(x4 , y4, z1);
   glEnd();
 
   glBegin(GL_QUADS);
   glColor3f(0.4, 0.4, 0.4);
-  glVertex3f(x1, y1, z2);
-  glVertex3f(x3, y3, z1);
   glVertex3f(x2, y2, z1);
+  glVertex3f(x4, y4, z1);
   glVertex3f(x4, y4, z2);
+  glVertex3f(x2, y2, z2);
   glEnd();
   
 }

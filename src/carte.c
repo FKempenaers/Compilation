@@ -147,7 +147,7 @@ void gencarte(int n){
   srand(getpid());
   int i,ii,jj,res;
   int dim;
-  carteT = (int**) malloc(sizeof(int*)*(MAXY-MINY));
+  carteT = (int**) calloc((MAXY-MINY),sizeof(int*));
   for(i = 0;i < (MAXX-MINX);i++){
     carteT[i] = (int*)calloc((MAXY-MINY),sizeof(int));
   }
@@ -211,7 +211,7 @@ void gencarte(int n){
   }
 }
 int trace_point2(int x,int y){
-  if(carteT[x][y] == 0){
+  if(carteT[x][y] != 1){
     carteT[x][y] = 2;
     if(x+1 < MAXX){
       carteT[x+1][y] = 2;

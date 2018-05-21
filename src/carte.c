@@ -86,12 +86,11 @@ void affiche_cube_sol(int  x1, int y1, int z1, int x2,int y2, int z2,double colo
 
 void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
-  int x3,x4,y3,y4;
+  int x3,x4,y3,y4,i,j;
   x3 = x1 + 1;
   x4 = x2 + 1;
   y3 = y1;
   y4 = y2;
-  Bresenham_enti(x1,y1,x2,y2);
   x1--;
   x2--;
   
@@ -146,7 +145,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
 void gencarte(int n){
   srand(getpid());
-  int i,res;
+  int i,ii,jj,res;
   int dim;
   carteT = (int**) malloc(sizeof(int*)*(MAXY-MINY));
   for(i = 0;i < (MAXX-MINX);i++){
@@ -193,11 +192,30 @@ void gencarte(int n){
       carte[1][i] -= MINX;
       carte[2][i] -= MINX;
       carte[3][i] -= MINX;
-    }    
+    }
+    printf("test1\n");
+    trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i]);
+    printf("test2\n");
+    
+    /*if(Bresenham_enti(carte[0][i],carte[1][i],carte[2][i],carte[3][i])){
+      for(ii = 0; ii < MAXY;ii++){
+	for(jj = 0;jj < MAXX;jj++){
+	  if(carteT[ii][jj] == 2){
+	    carteT[ii][jj] = 1;
+	  }
+	}
+	}
+    }
+    else{
+      if(i > 4){
+	i--;
+      }
+    }
+    printf("test2\n");*/
   }
 }
 
-void Bresenham_enti(int x1, int y1, int x2, int y2){
+/*int Bresenham_enti(int x1, int y1, int x2, int y2){
   int x,y;
   int ax = x2 - x1;
   int ay = y2 - y1;
@@ -217,7 +235,9 @@ void Bresenham_enti(int x1, int y1, int x2, int y2){
   
   if(y2 > y1){
     for(x = x1, y = y1; x <= x2; x++){
-      trace_point2(x,y);
+      if(trace_point2(x,y) == 0){
+	return 0;
+      }
       erreur += (2*ay);
       if(erreur >= 0){
 	y++;
@@ -227,7 +247,9 @@ void Bresenham_enti(int x1, int y1, int x2, int y2){
   }
   else{
     for(x = x1, y = y1; x <= x2; x++){
-      trace_point2(x,y);
+      if(trace_point2(x,y) == 0){
+	return 0;
+      }
       erreur += (2*ay);
       if(erreur <= 0){
 	y--;
@@ -236,7 +258,38 @@ void Bresenham_enti(int x1, int y1, int x2, int y2){
     }
   }
   
-}
-void trace_point2(int x,int y){
-  carteT[x][y] = 1;
+  }*/
+int trace_point2(int x,int y){
+  printf("test3\n");
+  if(carte[x][y] == 0){
+    carteT[x][y] = 2;
+    if(x+1 < MAXX){
+      carteT[x+1][y] = 2;
+    }
+    if(x-1 > MINX){
+      carteT[x-1][y] = 2;
+    }
+    if(y+1 < MAXY){
+      carteT[x][y+1] = 2;
+      if(x+1 < MAXX){
+	carteT[x+1][y+1] = 2;
+      }
+      if(x-1 > MINX){
+	carteT[x-1][y+1] = 2;
+      }
+    }
+    if(y-1 > MINY){
+      carteT[x][y-1] = 2;
+      if(x+1 < MAXX){
+	carteT[x+1][y-1] = 2;
+      }
+      if(x-1 > MINX){
+	carteT[x-1][y-1] = 2;
+      }
+    }
+    printf("test4\n");
+    return 1;
+  }
+  printf("test5\n");
+  return 0;
 }

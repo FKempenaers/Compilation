@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "fonctions.h"
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <GL/glu.h>
+#include "SDL/SDL.h"
 
 
 int **carte;

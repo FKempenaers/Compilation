@@ -4,7 +4,6 @@
 #include "SDL/SDL.h"
 #include <math.h>
 #include "../inc/fonctions.h"
-#include "../inc/point.h"
 #include "../inc/carte.h"
 #include "../inc/minimap.h"
 
@@ -275,9 +274,8 @@ void init_snake(){
 
 
 void anime_snake(){
-  int i,timer;
-  int xO,yO,xM,yM;
-  int xU,yU,xV,yV;
+  int i,oldX,oldY;
+  
   SDL_GetMouseState(&xSouris,&ySouris);
 
   /*calculer le vecteur entre milieu écran et position curseur
@@ -300,8 +298,19 @@ On veut calculer les vecteurs OA (u)  et OM (v) et trouver l'angle*/
   angle = acos( (xU*xV+yU*yV)/(sqrt(xU*xU+yU*yU)*sqrt(xV*xV+yV*yV)) );
   printf("angle : %lf",angle*180/PI);
   */
+  oldX = xs;
+  oldY = ys;
+  
   xs += RAYON*2*sin(angle);
   ys += RAYON*2*cos(angle);
+
+  while(carteT[xs][ys]!=0){
+    xs = oldX;
+    ys = oldY;
+    angle += PI/4;
+    xs += RAYON*2*sin(angle);
+    ys += RAYON*2*cos(angle);
+  }
 
   for(i=TAILLE_MAX; i>0; i--){
     snake[i][0] = snake[i-1][0];//-snake[i][j];

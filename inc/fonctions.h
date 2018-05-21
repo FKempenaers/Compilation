@@ -1,3 +1,6 @@
+#ifndef _FONCTIONS_H
+#define _FONCTIONS_H
+
 
 #include <stdio.h>
 #include <unistd.h>
@@ -46,3 +49,5 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color);
 void affiche_pente(int x1, int y1, int z1, int x2,int y2, int z2);
 void affiche_sol();
 void gencarte(int n);
+
+#endif

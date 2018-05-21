@@ -14,17 +14,18 @@ int trace_segment_bresenInt(int x1, int y1, int x2, int y2){
     return trace_seg_bres1(x1, y1, x2, y2, deltaX, deltaY);
   }
   //second quadrant
-  if(x1>x2 && y1<y2){
+  if(x1>=x2 && y1<=y2){
     return trace_seg_bres2(x1, y1, x2, y2, deltaX, deltaY);
   }
   //troisieme quadrant
-  if(x1>x2 && y1>y2){
+  if(x1>=x2 && y1>=y2){
     return trace_seg_bres3(x1, y1, x2, y2, deltaX, deltaY);
   }
   //troisieme quadrant
-  if(x1<x2 && y1>y2){
+  if(x1<=x2 && y1>=y2){
     return trace_seg_bres4(x1, y1, x2, y2, deltaX, deltaY);
   }
+  return 333;
   /******************************************************************************/
 
 }

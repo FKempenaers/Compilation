@@ -257,8 +257,8 @@ void init_snake(){
   increment = 0.25;
   vitesse = 0.10;
   direction = 0;
-  xs = MINX+RAYON*2;
-  ys = MINY;
+  xs = MINX+RAYON*2+5;
+  ys = MINY+5;
   zs = RAYON;
 
   snake[0][0] = xs;

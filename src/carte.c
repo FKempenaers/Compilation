@@ -174,10 +174,8 @@ void gencarte(int n){
   for(ii = 0; ii < MAXY;ii++){
     for(jj = 0;jj < MAXX;jj++){
       if(carteT[ii][jj] == 2){
-	printf("%d %d|",ii,jj);
 	carteT[ii][jj] = 1;
       }
-      printf("!!!");
     }
   }
 
@@ -222,13 +220,6 @@ void gencarte(int n){
       }
     }
   }
-  /*for(ii = 0; ii < MAXY;ii++){
-    for(jj = 0;jj < MAXX;jj++){
-      printf("%d ", carteT[ii][jj]);
-    }
-    printf("\n");
-  }
-  printf("fin\n");*/
 }
 int trace_point2(int x,int y){
   if(carteT[x][y] != 1){

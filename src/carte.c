@@ -15,10 +15,10 @@ void affiche_sol(){
     mi*=2;
     mi-=10;
   }
-  affiche_cube_sol(MINX,MINY,0,MAXX-20,MAXY,1,0.8);
-  affiche_cube_sol(MAXX,MINY,0,MAXX-20,MAXY-10,1,0.8);
-  affiche_pente(MINX + 5, MINY , 1,MINX+20,MINY+10,10);
-  affiche_pente(MAXX - 5, MAXY, -10,MAXX-20,MAXY-10,1);
+  affiche_cube_sol(MINX,MINY,0,MAXX-40,MAXY,1,0.8);
+  affiche_cube_sol(MAXX,MINY,0,MAXX-40,MAXY-10,1,0.8);
+  affiche_pente(MINX + 20, MINY , 1,MINX+40,MINY+10,10);
+  affiche_pente(MAXX - 20, MAXY, -10,MAXX-40,MAXY-10,1);
 }
 
 void affiche_mur( int x1, int y1, int z1, int x2,int y2, int z2){
@@ -196,13 +196,6 @@ void gencarte(int n){
       carte[2][i] -= MINX;
       carte[3][i] -= MINX;
     }    
-  }
-  int j;
-  for(i = MINX; i < MAXX;i++){
-    for(j=MINY;j<MAXY;j++){
-      printf("%d ",carteT[i][j]);
-    }
-    printf("\n");
   }
 }
 

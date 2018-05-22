@@ -3,8 +3,8 @@
 
 #include "../inc/minimap.h"
 #include "../inc/fonctions.h"
-#define OFFSETX 100
-#define OFFSETY 100
+#define OFFSETX 10
+#define OFFSETY 10
 
 void affiche_minimap(){
   int i,j;

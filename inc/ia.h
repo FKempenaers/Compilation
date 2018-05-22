@@ -1,17 +1,13 @@
 #ifndef _IA_H
 #define _IA_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include "time.h"
 #include "fonctions.h"
 #include "carte.h"
-
-typedef struct point {
-    double x;
-    double y;
-    double z;
-} point;
+#include "point.h"
 
 /*
  * Retourne la case vers laquelle l'IA va se diriger (4 dimensions)

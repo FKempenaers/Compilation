@@ -38,17 +38,13 @@ void affichage(){
   //gluLookAt(MAXX/2,-20,40,MAXX/2,0,0,0,0,1);
   gluLookAt(xs,ys-5,20,xs,ys,0,0,0,1);
   //glRotatef(angle,0,0,1);
-  trace_grille();
+  //trace_grille();
 
   /*****************************/
   
-  if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
-  if(genCarteOK == 0){
-    gencarte(10);
-    genCarteOK = 1;
-  }
   affiche_carte(carte,10);
   affiche_snake(xs,ys,zs);
+  affiche_ia(ia);
 
 
 
@@ -255,12 +251,15 @@ void init_snake(){
 
 
 void anime_snake(){
-  int i,oldX,oldY,oldAngle;
+  int i,oldX,oldY;
+  double oldAngle;
   
   oldX = xs;
   oldY = ys;
+  while(angle > 2*PI)
+    angle -= 2*PI;
+
   oldAngle = angle;
-  
   xs += RAYON*2*sin(angle);
   ys += RAYON*2*cos(angle);
 
@@ -303,4 +302,24 @@ void anime_snake(){
   snake[0][2] = zs;
 }
 
+void affiche_ia(point* ia){
+  int i,j;
+  GLUquadric* lol;
+  lol = gluNewQuadric();
+ 
 
+  glColor3ub(255,0,0);
+  glPushMatrix();
+  glTranslated(ia[0].x,ia[0].y,ia[0].z);
+  gluSphere(lol, RAYON, 10,10);
+
+  for(i = 1; i <TAILLE_MAX;i++){
+    glPopMatrix();
+    glPushMatrix();
+    glColor3ub(128,(i*20)%255,128);
+    glTranslated(ia[i].x,ia[i].y,ia[i].z);
+    gluSphere(lol,RAYON, 10,10);
+  }
+
+  glPopMatrix();
+}

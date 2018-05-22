@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include "../inc/ia.h"
+#include "point.h"
 
 #define PIXELS_X 1300
 #define PIXELS_Y 700
@@ -31,6 +33,7 @@ int snake[TAILLE_MAX][3];
 double vitesse;
 int compteur;
 int xSouris,ySouris;
+point* ia;
 
 
 void affichage();
@@ -46,5 +49,6 @@ void affiche_mur( int x1, int y1, int z1, int x2,int y2, int z2);
 void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color);
 void affiche_pente(int x1, int y1, int z1, int x2,int y2, int z2);
 void affiche_sol();
+void affiche_ia(point ia[]);
 
 #endif

@@ -2,6 +2,7 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 #include "SDL/SDL.h"
+#include "../inc/ia.h"
 #include "../inc/fonctions.h"
 
 
@@ -19,6 +20,15 @@ int main (int argc, char* argv[]){
   atexit(SDL_Quit);
   SDL_WM_SetCaption("SnakeVSold",NULL);
   ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
+
+
+  if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
+  if(genCarteOK == 0){
+    gencarte(10);
+    genCarteOK = 1;
+  }
+  
+  ia = creer_ia(RAYON);
 
   for (;;)
     {
@@ -41,6 +51,7 @@ int main (int argc, char* argv[]){
         }
       affichage();
       anime_snake();
+      mouvement_ia(ia);
       
       ellapsed_time = SDL_GetTicks() - start_time;
 

@@ -177,14 +177,17 @@ point* creer_ia(double case_init_z) {
 
     nouvelle_ia = (point*)malloc(sizeof(point) * TAILLE_MAX);
 
-    case_init.x = (double)rand()/(double)MAXX;
-    case_init.y = (double)rand()/(double)MAXY;
-    case_init.z = case_init_z;
-
     while (check) {
-        if (carte[(int)case_init.x][(int)case_init.y] != 1 && carte[(int)case_init.x][(int)case_init.y] != 3) {
-            check = 0;
-        }
+
+      case_init.x = rand()%MAXX;
+      case_init.y = rand()%MAXY;
+      case_init.z = case_init_z;
+      printf("%lf %lf %lf\n",case_init.x,case_init.y,case_init.z);
+
+
+      if (carteT[(int)case_init.x][(int)case_init.y] != 1 && carteT[(int)case_init.x][(int)case_init.y] != 3) {
+	check = 0;
+      }
     }
 
     for (i = 0; i < TAILLE_MAX; i++) {
@@ -194,26 +197,4 @@ point* creer_ia(double case_init_z) {
     }
     
     return nouvelle_ia;
-}
-
-int main () {
-    int i;
-    point* ia = creer_ia(10);
-
-    for (i = 0; i < TAILLE_MAX; i++) {
-        snake[i][0] = 0;
-        snake[i][1] = 0;
-        snake[i][2] = 0;
-
-        ia[i].x = 10;
-        ia[i].y = 20;
-        ia[i].z = 10;
-    }
-
-    mouvement_ia(ia);
-    /*
-    for (i = 0; i < TAILLE_MAX; i++) {
-        printf("%f %f %f\n", ia[i].x, ia[i].y, ia[i].z);
-    }
-    */
 }

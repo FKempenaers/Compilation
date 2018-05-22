@@ -194,7 +194,7 @@ void gencarte(int n){
     }
   }
   for(ii = MINX+15;ii < MINX+40;ii++){
-    for(jj = MINY+1; jj <MINY+13;jj++){
+    for(jj = MINY+3; jj <MINY+13;jj++){
       carteT[ii][jj] = 3;
     }
   }

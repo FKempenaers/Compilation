@@ -225,6 +225,13 @@ void gencarte(int n){
       }
     }
     else{
+      for(ii = MINX; ii < MAXY;ii++){
+	for(jj = MINY;jj < MAXX;jj++){
+	  if(carteT[ii][jj] == 2){
+	    carteT[ii][jj] = 0;
+	  }
+	}
+      }
       i--;
     }
   }
@@ -308,5 +315,7 @@ int trace_point2(int x,int y){
     }
     return 1;
   }
-  else return 0;
+  else {
+    return 0;
+  }
 }

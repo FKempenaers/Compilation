@@ -14,6 +14,11 @@
 int choix_casev2(point depart, point arrive);
 
 /*
+ * Vérifie si la case vers laquelle l'IA va est une case valide ou non
+ */
+int check_case(int choix_case, point tete_ia);
+
+/*
  * Retourne le point du serpent joueur le plus proche de l'IA
  */
 point distance(point depart);
@@ -29,7 +34,7 @@ void avancer_corps(point ia[], point nouvelle_tete);
 void mouvement_ia(point ia[]);
 
 /*
- * Retourne le tableau de point d'un serpent IA à une hauteur donnée z, la position est aléatoire.
+ * Retourne le tableau de point d'un serpent IA à une hauteur donnée z, la position est aléatoire
  */
 point* creer_ia(double case_init_z);
 

@@ -53,23 +53,66 @@ int choix_casev2(point depart, point arrive) {
         }
     }
 
+    if (check_case(1, depart) == 1 && retour == 1) {
+        if (check_case(4, depart) == 4) {
+            if (check_case(2, depart) == 2) {
+                retour = 3;
+            }
+            else {
+                retour = 2;
+            }
+        }
+        else {
+            retour = 4;
+        }
+    }
+    else if (check_case(2, depart) == 2 && retour == 2) {
+        if (check_case(1, depart) == 1) {
+            if (check_case(3, depart) == 3) {
+                retour = 4;
+            }
+            else {
+                retour = 3;
+            }
+        }
+        else {
+            retour = 1;
+        }
+    }
+    else if (check_case(3, depart) == 3 && retour == 3) {
+        
+    }
+    else if () {
+        
+    }
+
+
     return retour;
 }
 
 int check_case(int choix_case, point tete_ia) {
     if (choix_case == 1) {
         if(carteT[(int)(tete_ia.x+1)][(int)tete_ia.y] == 1 || carteT[(int)(tete_ia.x+1)][(int)tete_ia.y]) {
+            return 1;
         }
     }
     else if (choix_case == 2) {
-
+        if(carteT[(int)(tete_ia.x)][(int)tete_ia.y-1] == 1 || carteT[(int)(tete_ia.x)][(int)tete_ia.y-1]) {
+            return 2;
+        }
     }
     else if (choix_case == 3) {
-
+        if(carteT[(int)(tete_ia.x-1)][(int)tete_ia.y] == 1 || carteT[(int)(tete_ia.x-1)][(int)tete_ia.y]) {
+            return 3;
+        }
     }
     else if (choix_case == 4) {
-
+        if(carteT[(int)(tete_ia.x)][(int)tete_ia.y+1] == 1 || carteT[(int)(tete_ia.x)][(int)tete_ia.y+1]) {
+            return 4;
+        }
     }
+
+    return 0;
 }
 
 point distance (point depart) {

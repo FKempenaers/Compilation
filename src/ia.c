@@ -167,6 +167,33 @@ void mouvement_ia(point ia[]) {
     avancer_corps(ia, nouveau);
 }
 
+point* creer_ia(double case_init_z) {
+    int i;
+    point nouvelle_ia[TAILLE_MAX];
+    point case_init;
+    int check = 1;
+
+    srand(time(NULL));
+    
+    case_init.x = (double)rand()%300;
+    case_init.y = (double)rand()%300;
+    case_init.z = case_init_z;
+
+    while (check) {
+        if (carte[(int)case_init.x][(int)case_init.z] != 1 && carte[(int)case_init.x][(int)case_init.z] != 3) {
+            check = 0;
+        }
+    }
+
+    for (i = 0; i < TAILLE_MAX; i++) {
+        nouvelle_ia[i].x = case_init.x;
+        nouvelle_ia[i].y = case_init.y;
+        nouvelle_ia[i].z = case_init.z;
+    }
+    
+    return nouvelle_ia;
+}
+
 int main () {
     int i;
     point ia[TAILLE_MAX];

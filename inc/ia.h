@@ -33,4 +33,9 @@ void avancer_corps(point ia[], point nouvelle_tete);
  */
 void mouvement_ia(point ia[]);
 
+/*
+ * Retourne le tableau de point d'un serpent IA à une hauteur donnée z, la position est aléatoire.
+ */
+point* creer_ia(double case_init_z);
+
 #endif

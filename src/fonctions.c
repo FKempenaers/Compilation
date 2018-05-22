@@ -42,10 +42,9 @@ void affichage(){
 
   /*****************************/
   
-  affiche_carte(carte,10);
+  affiche_carte(carte,15);
   affiche_snake(xs,ys,zs);
   affiche_ia(ia);
-
 
 
   /*******************************************************************************/

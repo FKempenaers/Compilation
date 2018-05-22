@@ -1,49 +1,5 @@
 #include "../inc/ia.h"
 
-int choix_case(point depart, point arrive) {
-    int retour = 0;
-    
-    if (arrive.x > depart.x && arrive.x > arrive.y && - arrive.x < arrive.y) {
-        if (carte[(int)depart.x+1][(int)depart.y] != 1) {
-            //La case arrive se trouve à droite de la case depart
-            retour = 1;
-        }
-        else {
-            //On ne peut pas aller à droite
-            retour = 0;
-        }
-    }
-    else if (arrive.y < depart.y && (arrive.x < - arrive.y || - arrive.x < - arrive.y)) {
-        if (carte[(int)depart.x][(int)depart.y-1] != 1) {
-            //La case arrive se trouve en dessous de la case depart
-            retour = 2;
-        }
-        else {
-            retour = 0;
-        }
-    }
-    else if (arrive.x < depart.x && (- arrive.x > - arrive.x || - arrive.x < arrive.x)) {
-        if (carte[(int)depart.x-1][(int)depart.y] != 1) {
-            //La case arrive se trouve à gauche de la case depart
-            retour = 3;
-        }
-        else {
-            retour = 0;
-        }
-    }
-    else if (arrive.y > depart.y && arrive.x < arrive.y && arrive.x > - arrive.y) {
-        if (carte[(int)depart.x][(int)depart.y+1] != 1) {
-            //La case arrive se trouve en ahut de la case depart
-            retour = 4;
-        }
-        else {
-            retour = 0;
-        }
-    }
-
-    return retour;
-}
-
 int choix_casev2(point depart, point arrive) {
     int retour = 0;
 
@@ -100,6 +56,22 @@ int choix_casev2(point depart, point arrive) {
     return retour;
 }
 
+int check_case(int choix_case, point tete_ia) {
+    if (choix_case == 1) {
+        if(carteT[(int)(tete_ia.x+1)][(int)tete_ia.y] == 1 || carteT[(int)(tete_ia.x+1)][(int)tete_ia.y]) {
+        }
+    }
+    else if (choix_case == 2) {
+
+    }
+    else if (choix_case == 3) {
+
+    }
+    else if (choix_case == 4) {
+
+    }
+}
+
 point distance (point depart) {
     int i;
     point retour;
@@ -142,6 +114,7 @@ void avancer_corps(point ia[], point nouvelle_tete) {
 void mouvement_ia(point ia[]) {
     point nouveau;
     point cible = distance(ia[0]);
+    int check = 1;
 
     nouveau.x = ia[0].x;
     nouveau.y = ia[0].y;
@@ -163,7 +136,7 @@ void mouvement_ia(point ia[]) {
     default:
         break;
     }
-
+ 
     avancer_corps(ia, nouveau);
 }
 
@@ -173,8 +146,6 @@ point* creer_ia(double case_init_z) {
     point case_init;
     int check = 1;
 
-    srand(time(NULL));
-
     nouvelle_ia = (point*)malloc(sizeof(point) * TAILLE_MAX);
 
     while (check) {
@@ -182,8 +153,6 @@ point* creer_ia(double case_init_z) {
       case_init.x = rand()%MAXX;
       case_init.y = rand()%MAXY;
       case_init.z = case_init_z;
-      printf("%lf %lf %lf\n",case_init.x,case_init.y,case_init.z);
-
 
       if (carteT[(int)case_init.x][(int)case_init.y] != 1 && carteT[(int)case_init.x][(int)case_init.y] != 3) {
 	check = 0;

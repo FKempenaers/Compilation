@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include "time.h"
 #include "fonctions.h"
 #include "carte.h"
 #include "point.h"
@@ -12,7 +11,6 @@
 /*
  * Retourne la case vers laquelle l'IA va se diriger (4 dimensions)
  */
-int choix_case(point depart, point arrive);
 int choix_casev2(point depart, point arrive);
 
 /*

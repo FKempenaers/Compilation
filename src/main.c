@@ -24,39 +24,41 @@ int main (int argc, char* argv[]){
 
   if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
   if(genCarteOK == 0){
-    gencarte(10);
+    gencarte(15);
     genCarteOK = 1;
   }
+  srand(getpid());
   
   ia = creer_ia(RAYON);
 
   for (;;)
-    {
+  {
       start_time = SDL_GetTicks();
       SDL_PollEvent(&event);
       switch(event.type)
-        {
-	case SDL_QUIT:
+      {
+      case SDL_QUIT:
 	  exit(0);
 	  break;
-	case SDL_KEYDOWN:
+      case SDL_KEYDOWN:
 	  switch( event.key.keysym.sym ){
 	  case SDLK_LEFT:
-	    angle -= PI/4;
-	    break;
+              angle -= PI/4;
+              break;
 	  case SDLK_RIGHT:
-	    angle += PI/4;
-	    break;
+              angle += PI/4;
+              break;
 	  }
-        }
+      }
       affichage();
       anime_snake();
+      
       mouvement_ia(ia);
       
       ellapsed_time = SDL_GetTicks() - start_time;
 
-      if (ellapsed_time < 100){
-	SDL_Delay(100 - ellapsed_time);
+      if (ellapsed_time < 200){
+	SDL_Delay(200 - ellapsed_time);
       }
     }
 

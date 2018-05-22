@@ -289,9 +289,9 @@ void anime_snake(){
     xs = oldX;
     ys = oldY;
     if(i%2==0)
-      angle += i*(PI/4);
+      angle += i*(PI/8);
     else
-      angle -= i*(PI/4);
+      angle -= i*(PI/8);
     
     xs += RAYON*2*sin(angle);
     ys += RAYON*2*cos(angle);

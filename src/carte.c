@@ -87,7 +87,6 @@ void affiche_cube_sol(int  x1, int y1, int z1, int x2,int y2, int z2,double colo
 void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
   int x3,x4,y3,y4;
-  //if((x1 - x2)^2 <= (y1 - y2)^2){
   if((x1-x2)*(x1-x2) <= (y1-y2)*(y1-y2) ){
     x3 = x1 + 1;
     x4 = x2 + 1;

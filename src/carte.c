@@ -188,6 +188,16 @@ void gencarte(int n){
       }
     }
   }
+  for(ii = MAXX-15;ii > MAXX-40;ii--){
+    for(jj = MAXY-10; jj >MAXY-10;jj--){
+      carteT[ii][jj] = 3;
+    }
+  }
+  for(ii = MINX+15;ii < MINX+40;ii++){
+    for(jj = MINY+1; jj <MINY+13;jj++){
+      carteT[ii][jj] = 3;
+    }
+  }
 
   for(i = 4; i < n;i++){
     carte[0][i] = rand()%dim;
@@ -238,44 +248,44 @@ void gencarte(int n){
 }
 
 int est_pas_entoure(int x,int y){
-  if(carteT[x][y] != 1){
+  if(carteT[x][y] != 1 && carteT[x][y] != 3){
     if(x+1 < MAXX ){
-      if(carteT[x+1][y] == 1){
+      if(carteT[x+1][y] == 1 || carteT[x+1][y] == 3){
 	return 0;
       }
     }
     if(x-1 > MINX){
-      if(carteT[x-1][y] == 1){
+      if(carteT[x-1][y] == 1 || carteT[x-1][y] == 3){
 	return 0;
       }
     }
     if(y+1 < MAXY){
-      if(carteT[x][y+1] == 1){
+      if(carteT[x][y+1] == 1 || carteT[x][y+1] == 3){
 	return 0;
       }
       if(x+1 < MAXX){
-	if(carteT[x+1][y+1] == 1){
+	if(carteT[x+1][y+1] == 1 || carteT[x+1][y+1] == 3){
 	  return 0;
 	}
       }
       if(x-1 > MINX){
-	if(carteT[x-1][y+1] == 1){
+	if(carteT[x-1][y+1] == 1 || carteT[x-1][y+1] == 3){
 	  return 0;
 	}
       }
     }
     if(y-1 > MINY){
-      if( carteT[x][y-1] == 1){
+      if( carteT[x][y-1] == 1 || carteT[x][y-1] == 3){
         return 0;
       }
      
       if(x+1 < MAXX){
-	if(carteT[x+1][y-1] == 1){
+	if(carteT[x+1][y-1] == 1 || carteT[x+1][y-1] == 3){
 	  return 0;
 	}
       }
       if(x-1 > MINX){
-	if(carteT[x-1][y-1] == 1){
+	if(carteT[x-1][y-1] == 1 || carteT[x-1][y-1] == 3){
 	  return 0;
 	}
       }

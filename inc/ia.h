@@ -16,6 +16,7 @@ typedef struct point {
  * Retourne la case vers laquelle l'IA va se diriger (4 dimensions)
  */
 int choix_case(point depart, point arrive);
+int choix_casev2(point depart, point arrive);
 
 /*
  * Retourne le point du serpent joueur le plus proche de l'IA

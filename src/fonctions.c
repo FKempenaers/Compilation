@@ -44,10 +44,10 @@ void affichage(){
   
   if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
   if(genCarteOK == 0){
-    gencarte(30);
+    gencarte(250);
     genCarteOK = 1;
   }
-  affiche_carte(carte,30);
+  affiche_carte(carte,250);
   affiche_snake(xs,ys,zs);
 
 

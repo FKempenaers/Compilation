@@ -44,10 +44,10 @@ void affichage(){
   
   if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
   if(genCarteOK == 0){
-    gencarte(250);
+    gencarte(10);
     genCarteOK = 1;
   }
-  affiche_carte(carte,250);
+  affiche_carte(carte,10);
   affiche_snake(xs,ys,zs);
 
 
@@ -75,23 +75,12 @@ void affichage(){
 void animer(){
   int i,j,increment2;
   
-  /* angle += increment;
-  if(angle > 360)
-    angle = 0;
-  */
   increment2 = 0;
   compteur++;
   if(compteur > RAYON*2){
     compteur = 0;
     increment2 = RAYON*2;
   }
-  /*
-  printf("sphere 1 : %lf %lf\n",snake[0][0],snake[0][1]);
-  printf("sphere 2 : %lf %lf\n",snake[1][0],snake[1][1]);
-  printf("sphere 3 : %lf %lf\n",snake[2][0],snake[2][1]);
-  printf("compteur : %d\n",compteur);
-  printf("increment : %d\n",increment2);
-  */
 
   
   
@@ -110,18 +99,10 @@ void animer(){
     ys-=increment2;
     break;
   }
-  /* if(xD==0&&xs>=MAXX)
-    xD++;
-  if(xD==1&&ys>=MAXY)
-    xD++;
-  if(xD==2&&xs<=MINX)
-    xD++;
-  if(xD==3&&ys<=MINY)
-    xD=0;
-  */
+
   if(increment2>0){
     for(i=TAILLE_MAX; i>0; i--){
-	snake[i][0] = snake[i-1][0];//-snake[i][j];
+	snake[i][0] = snake[i-1][0];
 	snake[i][1] = snake[i-1][1];
     }
     snake[0][0] = xs;
@@ -201,7 +182,7 @@ void affiche_snake(double x, double y, double z){
 
   glColor3ub(255,0,0);
   glPushMatrix();
-  glTranslated(snake[0][0],snake[0][1],z);
+  glTranslated(snake[0][0],snake[0][1],snake[0][2]);
   gluSphere(lol, RAYON, 10,10);
 
   for(i = 1; i <TAILLE_MAX;i++){
@@ -289,18 +270,33 @@ void anime_snake(){
     xs = oldX;
     ys = oldY;
     if(i%2==0)
-      angle += i*(PI/8);
+      angle += i*(PI/4);
     else
-      angle -= i*(PI/8);
+      angle -= i*(PI/4);
     
     xs += RAYON*2*sin(angle);
     ys += RAYON*2*cos(angle);
     i++;
   }
 
+  /***Si on est sur une pente**/
+  /*
+  affiche_pente(MINX + 15, MINY+1 , 1,MINX+40,MINY+13,10);
+  affiche_pente(MAXX - 15, MAXY, -10,MAXX-40,MAXY-10,1);
+  */
+  if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
+    zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
+  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY) ){
+    zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
+  }else{
+    zs = RAYON;
+  }
+    
+
   for(i=TAILLE_MAX; i>0; i--){
     snake[i][0] = snake[i-1][0];
     snake[i][1] = snake[i-1][1];
+    snake[i][2] = snake[i-1][2];
   }
   snake[0][0] = xs;
   snake[0][1] = ys;

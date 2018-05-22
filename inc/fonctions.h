@@ -24,10 +24,10 @@
 #define RAYON 1
 
 int k,direction;
-double xs,ys,zs;
+int xs,ys,zs;
 double angle;
 double increment;
-double snake[TAILLE_MAX][3];
+int snake[TAILLE_MAX][3];
 double vitesse;
 int compteur;
 int xSouris,ySouris;

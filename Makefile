@@ -1,7 +1,7 @@
 CC = gcc -Wall -O3
 
-projet : fonctions carte minimap
-	$(CC) -o bin/snake src/main.c obj/fonctions.o obj/carte.o obj/minimap.o -lGL -lGLU -lglut -lSDLmain -lSDL -lm
+projet : fonctions carte minimap bresenham
+	$(CC) -o bin/snake src/main.c obj/fonctions.o obj/carte.o obj/minimap.o obj/bresenham.o -lGL -lGLU -lglut -lSDLmain -lSDL -lm
 
 fonctions : inc/fonctions.h
 	$(CC) -c src/fonctions.c -o obj/fonctions.o -lGL -lGLU -lglut -lSDLmain -lSDL
@@ -14,6 +14,9 @@ minimap : inc/minimap.h
 
 ia : inc/ia.h
 	$(CC) src/ia.c -o obj/test_ia -lm
+
+bresenham :
+	$(CC) -c src/bresenham.c -o obj/bresenham.o
 
 clean:
 	rm -f obj/* src/*~ bin/snake

@@ -15,10 +15,10 @@ void affiche_sol(){
     mi*=2;
     mi-=10;
   }
-  affiche_cube_sol(MINX,MINY,0,MAXX-20,MAXY,1,0.8);
-  affiche_cube_sol(MAXX,MINY,0,MAXX-20,MAXY-10,1,0.8);
-  affiche_pente(MINX + 5, MINY , 1,MINX+20,MINY+10,10);
-  affiche_pente(MAXX - 5, MAXY, -10,MAXX-20,MAXY-10,1);
+  affiche_cube_sol(MINX,MINY,0,MAXX-40,MAXY,1,0.8);
+  affiche_cube_sol(MAXX,MINY,0,MAXX-40,MAXY-10,1,0.8);
+  affiche_pente(MINX + 20, MINY , 1,MINX+40,MINY+10,10);
+  affiche_pente(MAXX - 20, MAXY, -10,MAXX-40,MAXY-10,1);
 }
 
 void affiche_mur( int x1, int y1, int z1, int x2,int y2, int z2){
@@ -87,70 +87,77 @@ void affiche_cube_sol(int  x1, int y1, int z1, int x2,int y2, int z2,double colo
 void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 
   int x3,x4,y3,y4;
-  x3 = x1 + 1;
-  x4 = x2 - 1;
-  y3 = y1 + 1;
-  y4 = y2 - 1;
-  Bresenham_enti(x1,y1,x2,y2);
-  x1--;
-  y1--;
-  x2++;
-  y2++;
+  if((x1 - x2)^2 <= (y1 - y2)^2){
+    x3 = x1 + 1;
+    x4 = x2 + 1;
+    y3 = y1;
+    y4 = y2;
+    x1--;
+    x2--;
+  }
+  else{
+    x3 = x1;
+    x4 = x2;
+    y3 = y1 + 1;
+    y4 = y2 + 1;
+    y1--;
+    y2--;
+  }
   
   glBegin(GL_QUADS);
-  glColor3f(0.9, 0.9, 0.9);
+  glColor3f(0, 0, 0);
   glVertex3f(x1, y1, z1);
   glVertex3f(x2, y2, z1);
-  glVertex3f(x3, y3, z2);
-  glVertex3f(x4, y4, z2);
+  glVertex3f(x4, y4, z1);
+  glVertex3f(x3, y3, z1);
   glEnd();
   glBegin(GL_QUADS);
-  glColor3f(0, 0.8, 0.8);
+  glColor3f(1, 1,1);
   glVertex3f(x1, y1, z1);
-  glVertex3f(x3, y3, z2);
+  glVertex3f(x1, y1, z2);
   glVertex3f(x2, y2, z2);
-  glVertex3f(x4, y4, z1);
+  glVertex3f(x2, y2, z1);
   glEnd();
   
   glBegin(GL_QUADS);
   glColor3f(0.7, 0.7, 0);
   glVertex3f(x1, y1, z1);
   glVertex3f(x3, y3, z1);
-  glVertex3f(x2, y2, z1);
-  glVertex3f(x4, y4, z1);
+  glVertex3f(x3, y3, z2);
+  glVertex3f(x1, y1, z2);
   glEnd();
 
   glBegin(GL_QUADS);
-  glColor3f(color, 0, color);
-  glVertex3f(x1, y1, z2);
-  glVertex3f(x3, y3, z2);
-  glVertex3f(x2, y2, z2);
+  glColor3f(1, 1, 1);
+  glVertex3f(x3, y3, z1);
+  glVertex3f(x4, y4, z1);
   glVertex3f(x4, y4, z2);
+  glVertex3f(x3, y3, z2);
   glEnd();
   
   glBegin(GL_QUADS);
-  glColor3f(0, 0.3, 0.6);
-  glVertex3f(x1, y1, z1);
+  glColor3f(0, 0, 0);
+  glVertex3f(x1, y1, z2);
   glVertex3f(x3, y3, z2);
+  glVertex3f(x4, y4, z2);
   glVertex3f(x2, y2, z2);
-  glVertex3f(x4 , y4, z1);
   glEnd();
 
   glBegin(GL_QUADS);
-  glColor3f(0.4, 0.4, 0.4);
-  glVertex3f(x1, y1, z2);
-  glVertex3f(x3, y3, z1);
+  glColor3f(0.7, 0.7, 0);
   glVertex3f(x2, y2, z1);
+  glVertex3f(x4, y4, z1);
   glVertex3f(x4, y4, z2);
+  glVertex3f(x2, y2, z2);
   glEnd();
   
 }
 
 void gencarte(int n){
   srand(getpid());
-  int i,res;
+  int i,ii,jj,res;
   int dim;
-  carteT = (int**) malloc(sizeof(int*)*(MAXY-MINY));
+  carteT = (int**) calloc((MAXY-MINY),sizeof(int*));
   for(i = 0;i < (MAXX-MINX);i++){
     carteT[i] = (int*)calloc((MAXY-MINY),sizeof(int));
   }
@@ -167,9 +174,20 @@ void gencarte(int n){
   else dim = MAXX-MINX;
   
   carte[0][0] = MINX+1; carte[1][0] = MINY+1; carte[2][0] = MINX+1; carte[3][0] = MAXY-1;
+  trace_segment_bresenInt(carte[0][0],carte[1][0],carte[2][0],carte[3][0]);
   carte[0][1] = MINX+1; carte[1][1] = MAXY-1; carte[2][1] = MAXX-1; carte[3][1] = MAXY-1;
+  trace_segment_bresenInt(carte[0][1],carte[1][1],carte[2][1],carte[3][1]);
   carte[0][2] = MAXX-1; carte[1][2] = MAXY-1; carte[2][2] = MAXX-1; carte[3][2] = MINY+1;
+  trace_segment_bresenInt(carte[0][2],carte[1][2],carte[2][2],carte[3][2]);
   carte[0][3] = MAXX-1; carte[1][3] = MINY+1; carte[2][3] = MINX+1; carte[3][3] = MINY+1;
+  trace_segment_bresenInt(carte[0][3],carte[1][3],carte[2][3],carte[3][3]);
+  for(ii = 0; ii < MAXY;ii++){
+    for(jj = 0;jj < MAXX;jj++){
+      if(carteT[ii][jj] == 2){
+	carteT[ii][jj] = 1;
+      }
+    }
+  }
 
   for(i = 4; i < n;i++){
     carte[0][i] = rand()%dim;
@@ -195,57 +213,100 @@ void gencarte(int n){
       carte[1][i] -= MINX;
       carte[2][i] -= MINX;
       carte[3][i] -= MINX;
-    }    
-  }
-  int j;
-  for(i = MINX; i < MAXX;i++){
-    for(j=MINY;j<MAXY;j++){
-      printf("%d ",carteT[i][j]);
     }
-    printf("\n");
+     
+    if(trace_segment_bresenInt(carte[0][i],carte[1][i],carte[2][i],carte[3][i]) == 1){
+      for(ii = MINX; ii < MAXY;ii++){
+	for(jj = MINY;jj < MAXX;jj++){
+	  if(carteT[ii][jj] == 2){
+	    carteT[ii][jj] = 1;
+	  }
+	}
+      }
+    }
+    else{
+      i--;
+    }
   }
 }
 
-void Bresenham_enti(int x1, int y1, int x2, int y2){
-  int x,y;
-  int ax = x2 - x1;
-  int ay = y2 - y1;
-  int erreur = ax*(-1);
-
-  if(x1 > x2){
-    ay = y2;
-    y2 = y1;
-    y1 = ay;
-    ay = y2 - y1;
-    ax = x2;
-    x2 = x1;
-    x1 = ax;
-    ax = x2-x1;
-    erreur = ax*(-1);
-  }
-  
-  if(y2 > y1){
-    for(x = x1, y = y1; x <= x2; x++){
-      trace_point2(x,y);
-      erreur += (2*ay);
-      if(erreur >= 0){
-	y++;
-	erreur -= (2*ax);
+int est_pas_entoure(int x,int y){
+  if(carteT[x][y] != 1){
+    if(x+1 < MAXX ){
+      if(carteT[x+1][y] == 1){
+	return 0;
       }
     }
-  }
-  else{
-    for(x = x1, y = y1; x <= x2; x++){
-      trace_point2(x,y);
-      erreur += (2*ay);
-      if(erreur <= 0){
-	y--;
-	erreur += (2*ax);
+    if(x-1 > MINX){
+      if(carteT[x-1][y] == 1){
+	return 0;
       }
     }
+    if(y+1 < MAXY){
+      if(carteT[x][y+1] == 1){
+	return 0;
+      }
+      if(x+1 < MAXX){
+	if(carteT[x+1][y+1] == 1){
+	  return 0;
+	}
+      }
+      if(x-1 > MINX){
+	if(carteT[x-1][y+1] == 1){
+	  return 0;
+	}
+      }
+    }
+    if(y-1 > MINY){
+      if( carteT[x][y-1] == 1){
+        return 0;
+      }
+     
+      if(x+1 < MAXX){
+	if(carteT[x+1][y-1] == 1){
+	  return 0;
+	}
+      }
+      if(x-1 > MINX){
+	if(carteT[x-1][y-1] == 1){
+	  return 0;
+	}
+      }
+    }
+    return 1;
   }
-  
+  return 0;
 }
-void trace_point2(int x,int y){
-  carteT[x][y] = 1;
+
+
+int trace_point2(int x,int y){
+  if (est_pas_entoure(x,y) == 1){
+    carteT[x][y] = 2;
+    if(x+1 < MAXX ){
+      carteT[x+1][y] = 2;
+    }
+    if(x-1 > MINX){ 
+      carteT[x-1][y] = 2; 
+    }
+    if(y+1 < MAXY){
+      carteT[x][y+1] = 2;
+      if(x+1 < MAXX){
+	carteT[x+1][y+1] = 2;
+      }
+      if(x-1 > MINX){
+	carteT[x-1][y+1] = 2;
+      }
+    }
+    if(y-1 > MINY){
+      carteT[x][y-1] = 2;
+      if(x+1 < MAXX){
+	carteT[x+1][y-1] = 2;
+      }
+      if(x-1 > MINX){
+	carteT[x-1][y-1] = 2;
+      }
+    }
+    return 1;
+  }
+  else return 0;
 }

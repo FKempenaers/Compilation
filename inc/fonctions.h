@@ -16,8 +16,8 @@
 #define TAILLE_MAX 10
 #define PI 3.14159265
  
-#define MAXX 300
-#define MAXY 300
+#define MAXX 100
+#define MAXY 100
 #define MINX 0
 #define MINY 0
 #define TAILLE_PIXEL 0.5

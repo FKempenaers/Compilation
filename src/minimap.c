@@ -13,7 +13,7 @@ void affiche_minimap(){
   glColor3ub(255,255,255);
   for(i = 0;i < (MAXX-MINX);i++){
     for(j = 0;j < (MAXY-MINY);j++){
-      if(carteT[i][j]){
+      if(carteT[i][j]==1){
 	glBegin(GL_POINTS);
 	glVertex2d(i+OFFSETX,j+OFFSETY);
 	glEnd();

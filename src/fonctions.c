@@ -265,7 +265,7 @@ void anime_snake(){
   ys += RAYON*2*cos(angle);
 
   i=1;
-  while(carteT[xs][ys]!=0){
+  while(carteT[xs][ys]==1){
     angle = oldAngle;
     xs = oldX;
     ys = oldY;

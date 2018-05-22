@@ -169,14 +169,16 @@ void mouvement_ia(point ia[]) {
 
 point* creer_ia(double case_init_z) {
     int i;
-    point nouvelle_ia[TAILLE_MAX];
+    point* nouvelle_ia;
     point case_init;
     int check = 1;
 
     srand(time(NULL));
-    
-    case_init.x = (double)rand()%MAXX;
-    case_init.y = (double)rand()%MAXY;
+
+    nouvelle_ia = (point*)malloc(sizeof(point) * TAILLE_MAX);
+
+    case_init.x = (double)rand()/(double)MAXX;
+    case_init.y = (double)rand()/(double)MAXY;
     case_init.z = case_init_z;
 
     while (check) {
@@ -196,7 +198,7 @@ point* creer_ia(double case_init_z) {
 
 int main () {
     int i;
-    point ia[TAILLE_MAX];
+    point* ia = creer_ia(10);
 
     for (i = 0; i < TAILLE_MAX; i++) {
         snake[i][0] = 0;

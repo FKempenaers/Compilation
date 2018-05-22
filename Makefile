@@ -13,7 +13,7 @@ minimap : inc/minimap.h
 	$(CC) -c src/minimap.c -o obj/minimap.o -lGL -lGLU -lglut -lSDLmain -lSDL
 
 ia : inc/ia.h
-	$(CC) src/ia.c -o obj/test_ia -lm
+	$(CC) -c src/ia.c -o obj/ia.o -lm
 
 bresenham :
 	$(CC) -c src/bresenham.c -o obj/bresenham.o

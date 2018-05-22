@@ -181,6 +181,15 @@ void gencarte(int n){
   trace_segment_bresenInt(carte[0][2],carte[1][2],carte[2][2],carte[3][2]);
   carte[0][3] = MAXX-1; carte[1][3] = MINY+1; carte[2][3] = MINX+1; carte[3][3] = MINY+1;
   trace_segment_bresenInt(carte[0][3],carte[1][3],carte[2][3],carte[3][3]);
+
+  trace_segment_bresenInt(MAXX-1,MAXY-10,MAXX-40,MAXY-10);
+  carte[0][4] = MAXX-40; carte[1][4] = MAXY-10; carte[2][4] = MAXX-2; carte[3][4] = MAXY-10;
+  trace_segment_bresenInt(MINX+40,MINY+13,MINX+15,MINY+13);
+  carte[0][5] = MINX+40; carte[1][5] = MINY+13; carte[2][5] = MINX+15; carte[3][5] = MINY+13;
+  trace_segment_bresenInt(MINX+41,MINY+3,MINX+41,MINY+13);
+  carte[0][6] = MINX+41; carte[1][6] = MINY+13; carte[2][6] = MINX+41; carte[3][6] = MINY+1;
+
+  
   for(ii = 0; ii < MAXY;ii++){
     for(jj = 0;jj < MAXX;jj++){
       if(carteT[ii][jj] == 2){
@@ -189,7 +198,7 @@ void gencarte(int n){
     }
   }
   for(ii = MAXX-15;ii > MAXX-40;ii--){
-    for(jj = MAXY-10; jj >MAXY-10;jj--){
+    for(jj = MAXY-3; jj > MAXY-10;jj--){
       carteT[ii][jj] = 3;
     }
   }
@@ -199,7 +208,7 @@ void gencarte(int n){
     }
   }
 
-  for(i = 4; i < n;i++){
+  for(i = 7; i < n;i++){
     carte[0][i] = rand()%dim;
     carte[1][i] = rand()%dim;
     res = rand()%dim;

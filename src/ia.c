@@ -175,12 +175,12 @@ point* creer_ia(double case_init_z) {
 
     srand(time(NULL));
     
-    case_init.x = (double)rand()%300;
-    case_init.y = (double)rand()%300;
+    case_init.x = (double)rand()%MAXX;
+    case_init.y = (double)rand()%MAXY;
     case_init.z = case_init_z;
 
     while (check) {
-        if (carte[(int)case_init.x][(int)case_init.z] != 1 && carte[(int)case_init.x][(int)case_init.z] != 3) {
+        if (carte[(int)case_init.x][(int)case_init.y] != 1 && carte[(int)case_init.x][(int)case_init.y] != 3) {
             check = 0;
         }
     }

@@ -17,8 +17,8 @@ void affiche_sol(){
   }
   affiche_cube_sol(MINX,MINY,0,MAXX-40,MAXY,1,0.8);
   affiche_cube_sol(MAXX,MINY,0,MAXX-40,MAXY-10,1,0.8);
-  affiche_pente(MINX + 20, MINY , 1,MINX+40,MINY+10,10);
-  affiche_pente(MAXX - 20, MAXY, -10,MAXX-40,MAXY-10,1);
+  affiche_pente(MINX + 15, MINY+1 , 1,MINX+40,MINY+13,10);
+  affiche_pente(MAXX - 15, MAXY, -10,MAXX-40,MAXY-10,1);
 }
 
 void affiche_mur( int x1, int y1, int z1, int x2,int y2, int z2){

@@ -80,10 +80,30 @@ int choix_casev2(point depart, point arrive) {
         }
     }
     else if (check_case(3, depart) == 3 && retour == 3) {
-        
+        if (check_case(2, depart) == 2) {
+            if (check_case(4, depart) == 4) {
+                retour = 1;
+            }
+            else {
+                retour = 4;
+            }
+        }
+        else {
+            retour = 2;
+        }
     }
-    else if () {
-        
+    else if (check_case(4, depart) == 4 && retour == 4) {
+        if (check_case(3, depart) == 3) {
+            if (check_case(1, depart) == 1) {
+                retour = 2;
+            }
+            else {
+                retour = 1;
+            }
+        }
+        else {
+            retour = 4;
+        }
     }
 
 

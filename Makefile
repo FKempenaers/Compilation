@@ -12,6 +12,9 @@ carte : inc/carte.h
 minimap : inc/minimap.h
 	$(CC) -c src/minimap.c -o obj/minimap.o -lGL -lGLU -lglut -lSDLmain -lSDL
 
+ia : inc/ia.h
+	$(CC) src/ia.c -o obj/test_ia -lm
+
 clean:
 	rm -f obj/* src/*~ bin/snake
 

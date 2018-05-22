@@ -274,46 +274,32 @@ void init_snake(){
 
 
 void anime_snake(){
-  int i,oldX,oldY;
+  int i,oldX,oldY,oldAngle;
   
-  SDL_GetMouseState(&xSouris,&ySouris);
-
-  /*calculer le vecteur entre milieu écran et position curseur
-    en déduire l'angle par rapport à l'horizontale
-    déplacer le snake en le faisant tourner
-
-soit A le point du curseur
-On veut calculer les vecteurs OA (u)  et OM (v) et trouver l'angle*/
-  /*
-  xO = TAILLE_X/2;
-  yO = TAILLE_Y/2;
-  xM = TAILLE_X/2;
-  yM = 0;
-
-  xU = xSouris-xO;
-  yU = ySouris-yO;
-  xV = xM-xO;
-  yV = yM-yO;
-  
-  angle = acos( (xU*xV+yU*yV)/(sqrt(xU*xU+yU*yU)*sqrt(xV*xV+yV*yV)) );
-  printf("angle : %lf",angle*180/PI);
-  */
   oldX = xs;
   oldY = ys;
+  oldAngle = angle;
   
   xs += RAYON*2*sin(angle);
   ys += RAYON*2*cos(angle);
 
+  i=1;
   while(carteT[xs][ys]!=0){
+    angle = oldAngle;
     xs = oldX;
     ys = oldY;
-    angle += PI/4;
+    if(i%2==0)
+      angle += i*(PI/4);
+    else
+      angle -= i*(PI/4);
+    
     xs += RAYON*2*sin(angle);
     ys += RAYON*2*cos(angle);
+    i++;
   }
 
   for(i=TAILLE_MAX; i>0; i--){
-    snake[i][0] = snake[i-1][0];//-snake[i][j];
+    snake[i][0] = snake[i-1][0];
     snake[i][1] = snake[i-1][1];
   }
   snake[0][0] = xs;

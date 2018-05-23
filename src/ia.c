@@ -278,7 +278,7 @@ void mouvement_ia_attentiste(point ia[]) {
     }
 }
 
-void mouvement_ia_fantome (point ia[0]) {
+void mouvement_ia_fantome (point ia[]) {
     point nouveau;
     point cible = distance(ia[0]);
 
@@ -304,6 +304,29 @@ void mouvement_ia_fantome (point ia[0]) {
     }
  
     avancer_corps(ia, nouveau);
+}
+
+int check_impact(point ia[]){
+    int i;
+
+    for (i = 1; i < TAILLE_MAX; i++) {
+        if (ia[0].x == snake[i][0] && ia[0].y == snake[i][1]) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int check_impact_ia (point ia[]) {
+    int i;
+
+    for (i = 0; i < TAILLE_MAX; i++) {
+        if (snake[0][0] == ia[i].x && snake[0][1] == ia[i].y) {
+            return 1;
+        }
+    }
+
+    return 0;
 }
 
 point* creer_ia(double case_init_z) {

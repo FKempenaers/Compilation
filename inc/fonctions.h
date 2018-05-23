@@ -25,6 +25,8 @@
 #define TAILLE_PIXEL 0.5
 #define RAYON 1
 
+#define NB_IAS 5
+
 int k,direction;
 int xs,ys,zs;
 double angle;
@@ -32,9 +34,8 @@ double increment;
 int snake[TAILLE_MAX][3];
 double vitesse;
 int compteur;
-int xSouris,ySouris;
+int xSouris,ySouris; 
 point* ia;
-
 
 void affichage();
 void animer();

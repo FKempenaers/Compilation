@@ -46,7 +46,18 @@ void mouvement_ia_attentiste(point ia[]);
 /*
  * L'IA peut traverser les murs
  */
-void mouvement_ia_fantome (point ia[0]);
+void mouvement_ia_fantome(point ia[]);
+
+/*
+ * Renvoie 0 si l'IA n'a pas rencontré le corps du snake et 1 si la tête de l'IA 
+ */
+int check_impact(point ia[]);
+
+/*
+ * Renvoie le numéro de l'IA touché par la tête du serpent et 0 sinon
+ */
+int check_impact_ia(point ia[]);
+
 /*
  * Retourne le tableau de point d'un serpent IA à une hauteur donnée z, la position est aléatoire
  */

@@ -131,8 +131,8 @@ void init_snake(){
   increment = 0.25;
   vitesse = 0.10;
   direction = 0;
-  xs = MINX+RAYON*2+5;
-  ys = MINY+5;
+  xs = MAXX/2+RAYON*2*10;
+  ys = MAXY/2+RAYON*2*10;
   zs = RAYON;
 
   snake[0][0] = xs;
@@ -140,28 +140,31 @@ void init_snake(){
   snake[0][2] = zs;
 
   for(int i = 1; i <TAILLE_MAX;i++){
-    snake[i][0] = snake[i-1][0]-RAYON*2;
-    snake[i][1] = 0;
+    snake[i][0] = MAXX/2+RAYON*2*10;
+    snake[i][1] = snake[i-1][1]-RAYON*2;
     snake[i][2] = RAYON;
   }
 }
 
 
 void anime_snake(){
-  int i,oldX,oldY;
-  double oldAngle;
+  int i;
+  double oldAngle,oldX,oldY;
   
   oldX = xs;
   oldY = ys;
-  while(angle > 2*PI)
-    angle -= 2*PI;
-
+  
+  while(angle > PI)
+    angle -= (2*PI);
+  while(angle < -PI)
+    angle += (2*PI);
+  
   oldAngle = angle;
   xs += RAYON*2*sin(angle);
   ys += RAYON*2*cos(angle);
 
   i=1;
-  while(carteT[xs][ys]==1){
+  while(carteT[(int)xs][(int)ys]==1){
     angle = oldAngle;
     xs = oldX;
     ys = oldY;
@@ -197,6 +200,9 @@ void anime_snake(){
   snake[0][0] = xs;
   snake[0][1] = ys;
   snake[0][2] = zs;
+
+  printf("X: %lf Y: %lf Angle : %lf\n",xs,ys,angle);
+  
 }
 
 void affiche_ia(point* ia){
@@ -213,7 +219,7 @@ void affiche_ia(point* ia){
   for(i = 1; i <TAILLE_MAX;i++){
     glPopMatrix();
     glPushMatrix();
-    glColor3ub(128,(i*20)%255,128);
+    glColor3ub(128,128,(i*20)%255);
     glTranslated(ia[i].x,ia[i].y,ia[i].z);
     gluSphere(lol,RAYON, 10,10);
   }

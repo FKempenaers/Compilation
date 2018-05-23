@@ -8,7 +8,7 @@
 
 int main (int argc, char* argv[]){
   
-  init_snake();
+ 
 
   SDL_Event event;
   Uint32 last_time = SDL_GetTicks();
@@ -28,28 +28,29 @@ int main (int argc, char* argv[]){
     genCarteOK = 1;
   }
   srand(getpid());
-  
+
+  init_snake();
   ia = creer_ia(RAYON);
 
   for (;;)
-  {
+    {
       start_time = SDL_GetTicks();
       SDL_PollEvent(&event);
       switch(event.type)
-      {
-      case SDL_QUIT:
+	{
+	case SDL_QUIT:
 	  exit(0);
 	  break;
-      case SDL_KEYDOWN:
+	case SDL_KEYDOWN:
 	  switch( event.key.keysym.sym ){
 	  case SDLK_LEFT:
-              angle -= PI/4;
-              break;
+	    angle -= (PI/4);
+	    break;
 	  case SDLK_RIGHT:
-              angle += PI/4;
-              break;
+	    angle += (PI/4);
+	    break;
 	  }
-      }
+	}
       affichage();
       anime_snake();
       

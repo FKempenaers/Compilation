@@ -14,6 +14,11 @@
 int choix_casev2(point depart, point arrive);
 
 /*
+ * Retourne la case vers laquelle l'IA va se diriger (4 dimensions)
+ */
+int choix_casev3(point depart, point arrive);
+
+/*
  * Vérifie si la case vers laquelle l'IA va est une case valide ou non
  */
 int check_case(int choix_case, point tete_ia);
@@ -29,10 +34,19 @@ point distance(point depart);
 void avancer_corps(point ia[], point nouvelle_tete);
 
 /*
- * Le tableau représentant l'IAavance d'une caseen direction du point le plus proche du serpent joueur
+ * Le tableau représentant l'IA avance d'une caseen direction du point le plus proche du serpent joueur
  */
 void mouvement_ia(point ia[]);
 
+/*
+ * L'IA avance vers le joueur uniquement si elle est proche de lui
+ */
+void mouvement_ia_attentiste(point ia[]);
+
+/*
+ * L'IA peut traverser les murs
+ */
+void mouvement_ia_fantome (point ia[0]);
 /*
  * Retourne le tableau de point d'un serpent IA à une hauteur donnée z, la position est aléatoire
  */

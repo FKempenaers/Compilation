@@ -53,7 +53,7 @@ int main (int argc, char* argv[]){
       affichage();
       anime_snake();
       
-      mouvement_ia(ia);
+      mouvement_ia_fantome(ia);
       
       ellapsed_time = SDL_GetTicks() - start_time;
 

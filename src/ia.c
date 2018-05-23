@@ -110,6 +110,50 @@ int choix_casev2(point depart, point arrive) {
     return retour;
 }
 
+int choix_casev3(point depart, point arrive) {
+    int retour = 0;
+    int random = rand()%2;
+    
+    if (arrive.x >= depart.x) {
+        if (arrive.y >= depart.y) {
+            if (random == 0) {
+                retour = 1;
+            }
+            else {
+                retour = 4;
+            }
+        }
+        else {
+           if (random == 0) {
+                retour = 1;
+            }
+            else {
+                retour = 2;
+            }
+        }
+    }
+    else {
+        if (arrive.y >= depart.y) {
+            if (random == 0) {
+                retour = 3;
+            }
+            else {
+                retour = 4;
+            }
+        }
+        else {
+           if (random == 0) {
+                retour = 2;
+            }
+            else {
+                retour = 3;
+            }
+        }
+    }
+
+    return retour;
+}
+
 int check_case(int choix_case, point tete_ia) {
     if (choix_case == 1) {
         if(carteT[(int)(tete_ia.x+1)][(int)tete_ia.y] == 1 || carteT[(int)(tete_ia.x+1)][(int)tete_ia.y]) {
@@ -177,13 +221,72 @@ void avancer_corps(point ia[], point nouvelle_tete) {
 void mouvement_ia(point ia[]) {
     point nouveau;
     point cible = distance(ia[0]);
-    int check = 1;
 
     nouveau.x = ia[0].x;
     nouveau.y = ia[0].y;
     nouveau.z = ia[0].z;
 
     switch(choix_casev2(ia[0], cible)){
+    case(1):
+        nouveau.x += 1;
+        break;
+    case(2):
+        nouveau.y -= 1;
+        break;
+    case(3):
+        nouveau.x -= 1;
+        break;
+    case(4):
+        nouveau.y += 1;
+        break;
+    default:
+        break;
+    }
+ 
+    avancer_corps(ia, nouveau);
+}
+
+void mouvement_ia_attentiste(point ia[]) {
+    point nouveau;
+    point cible = distance(ia[0]);
+
+    double distance = sqrt(pow(cible.x - ia[0].x, 2) + pow(cible.y - ia[0].y, 2));
+
+    nouveau.x = ia[0].x;
+    nouveau.y = ia[0].y;
+    nouveau.z = ia[0].z;
+
+    if (distance < 20) {
+        switch(choix_casev2(ia[0], cible)){
+        case(1):
+            nouveau.x += 1;
+            break;
+        case(2):
+            nouveau.y -= 1;
+            break;
+        case(3):
+            nouveau.x -= 1;
+            break;
+        case(4):
+            nouveau.y += 1;
+            break;
+        default:
+            break;
+        }
+        
+        avancer_corps(ia, nouveau);
+    }
+}
+
+void mouvement_ia_fantome (point ia[0]) {
+    point nouveau;
+    point cible = distance(ia[0]);
+
+    nouveau.x = ia[0].x;
+    nouveau.y = ia[0].y;
+    nouveau.z = ia[0].z;
+
+    switch(choix_casev3(ia[0], cible)){
     case(1):
         nouveau.x += 1;
         break;
@@ -213,13 +316,13 @@ point* creer_ia(double case_init_z) {
 
     while (check) {
 
-      case_init.x = rand()%MAXX;
-      case_init.y = rand()%MAXY;
-      case_init.z = case_init_z;
+        case_init.x = rand()%(MAXX - 25) + 25;
+        case_init.y = rand()%(MAXY - 25) + 25;
+        case_init.z = case_init_z;
 
-      if (carteT[(int)case_init.x][(int)case_init.y] != 1 && carteT[(int)case_init.x][(int)case_init.y] != 3) {
-	check = 0;
-      }
+        if (carteT[(int)case_init.x][(int)case_init.y] != 1 && carteT[(int)case_init.x][(int)case_init.y] != 3) {
+            check = 0;
+        }
     }
 
     for (i = 0; i < TAILLE_MAX; i++) {

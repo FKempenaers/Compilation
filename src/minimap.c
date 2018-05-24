@@ -20,7 +20,7 @@ void affiche_minimap(){
       }
     }
   }
-
+  
   /*Partie affichage snake*/
   glColor3ub(0,0,255);
   for(i = 0;i < TAILLE_MAX;i++){

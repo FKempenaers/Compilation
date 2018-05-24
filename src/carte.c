@@ -154,7 +154,6 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color){
 }
 
 void gencarte(int n){
-  srand(getpid());
   int i,ii,jj,res;
   int dim;
   carteT = (int**) calloc((MAXY-MINY),sizeof(int*));

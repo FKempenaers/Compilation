@@ -64,6 +64,10 @@ void affichage(){
       }
     }
     if(genCarteOK == 3){
+      tmp.nelem = 15;
+      tmp.carte = carte;
+      tmp.carteT = carteT;
+      liste_map = empile(tmp,liste_map);
       tmp = nieme(liste_map, idmap-1);
       carte = tmp.carte;
       carteT = tmp.carteT;

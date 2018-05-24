@@ -105,21 +105,21 @@ void affichage(){
 
 void affiche_snake(double x, double y, double z){
   int i,j;
-  GLUquadric* lol;
-  lol = gluNewQuadric();
+  GLUquadric* q;
+  q = gluNewQuadric();
  
 
-  glColor3ub(255,0,0);
+  glColor3ub(0,255,0);
   glPushMatrix();
   glTranslated(snake[0][0],snake[0][1],snake[0][2]);
-  gluSphere(lol, RAYON, 10,10);
+  gluSphere(q, RAYON, 10,10);
 
   for(i = 1; i <TAILLE_MAX;i++){
     glPopMatrix();
     glPushMatrix();
-    glColor3ub(128,(i*20)%255,128);
+    glColor3ub(128,192,(i*10)%255);
     glTranslated(snake[i][0],snake[i][1],snake[i][2]);
-    gluSphere(lol,RAYON, 10,10);
+    gluSphere(q,RAYON, 10,10);
   }
 
   glPopMatrix();
@@ -273,21 +273,21 @@ void anime_snake(){
 
 void affiche_ia(point* ia){
   int i,j;
-  GLUquadric* lol;
-  lol = gluNewQuadric();
+  GLUquadric* q;
+  q = gluNewQuadric();
  
 
   glColor3ub(255,0,0);
   glPushMatrix();
   glTranslated(ia[0].x,ia[0].y,ia[0].z);
-  gluSphere(lol, RAYON, 10,10);
+  gluSphere(q, RAYON, 10,10);
 
   for(i = 1; i <TAILLE_MAX;i++){
     glPopMatrix();
     glPushMatrix();
-    glColor3ub(128,(i*20)%255,128);
+    glColor3ub(255,(i*25)%255,(i*10)%255);
     glTranslated(ia[i].x,ia[i].y,ia[i].z);
-    gluSphere(lol,RAYON, 10,10);
+    gluSphere(q,RAYON, 10,10);
   }
 
   glPopMatrix();

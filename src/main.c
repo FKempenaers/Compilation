@@ -20,6 +20,7 @@ int main (int argc, char* argv[]){
   atexit(SDL_Quit);
   SDL_WM_SetCaption("SnakeVSold",NULL);
   ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
+  glutInit(&argc,argv);
   menu();
   liste_map = creer_liste_vide();
   gencarte(15);

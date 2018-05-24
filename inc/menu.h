@@ -6,5 +6,10 @@
 //int Diff;
 //int nbetage;
 void menu();
-void ligne(int,int,int);
+void bouton(int,int,char *string);
+void boutoncadre(int,int,int,int);
+void Gestionclic(int,int,int,int);
+void jouerM();
+void scoreM();
+int in(int*,int,int);
 

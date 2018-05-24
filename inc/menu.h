@@ -6,5 +6,5 @@
 //int Diff;
 //int nbetage;
 void menu();
-void bouton(int,int,int,int);
+void ligne(int,int,int);
 

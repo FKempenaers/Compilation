@@ -67,8 +67,8 @@ int main (int argc, char* argv[]){
       
       ellapsed_time = SDL_GetTicks() - start_time;
 
-      if (ellapsed_time < 200){
-	SDL_Delay(200 - ellapsed_time);
+      if (ellapsed_time < 100){
+	SDL_Delay(100 - ellapsed_time);
       }
 
       for (i = 0; i < diff*3; i++) {

@@ -47,12 +47,9 @@ void affichage(){
     if(genCarteOK == 2){
       tmp = nieme(liste_map,idmap+1);
       if(tmp.nelem == -1){
-	if(idmap < nbetage){
+	if(idmap == nbetage-1){
 	  cartefin();
 	  idmap++;
-	  for (i = 0; i < diff*3; i++) {
-	    ias[i] = NULL;
-	  }
 	}
 	else{
 	  tmp.nelem = 15;
@@ -66,12 +63,10 @@ void affichage(){
 	}
       }
       else{
-	if(idmap < nbetage){
-	  tmp = nieme(liste_map, idmap+1);
-	  carte = tmp.carte;
-	  carteT = tmp.carteT;
-	  idmap++;
-	}
+	tmp = nieme(liste_map, idmap+1);
+	carte = tmp.carte;
+	carteT = tmp.carteT;
+	idmap++;
       }
     }
     if(genCarteOK == 3){
@@ -96,7 +91,11 @@ void affichage(){
     if(ias[i]!=NULL)
       affiche_ia(ias[i]);
   }
-  
+  if(nbetage == idmap){
+    for (i = 0; i < diff*3; i++) {
+      ias[i] = NULL;
+    }
+  }
 
   /*******************************************************************************/
   /*Partie 2D*/

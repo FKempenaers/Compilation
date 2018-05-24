@@ -47,17 +47,21 @@ void affichage(){
     if(genCarteOK == 2){
       tmp = nieme(liste_map,idmap+1);
       if(tmp.nelem == -1){
-	tmp.nelem = 15;
-	tmp.carte = carte;
-	tmp.carteT = carteT;
-	liste_map = empile(tmp,liste_map);
-	carte = NULL;
-	carteT = NULL;
-	gencarte(15);
-	idmap++;
+	if(idmap == nbetage-1){
+	  cartefin();
+	}
+	else{
+	  tmp.nelem = 15;
+	  tmp.carte = carte;
+	  tmp.carteT = carteT;
+	  liste_map = empile(tmp,liste_map);
+	  carte = NULL;
+	  carteT = NULL;
+	  gencarte(15);
+	  idmap++;
+	}
       }
       else{
-	printf("test2");
 	tmp = nieme(liste_map, idmap+1);
 	carte = tmp.carte;
 	carteT = tmp.carteT;

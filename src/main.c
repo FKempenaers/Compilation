@@ -20,7 +20,7 @@ int main (int argc, char* argv[]){
   atexit(SDL_Quit);
   SDL_WM_SetCaption("SnakeVSold",NULL);
   ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
-  menu();
+  //menu();
   liste_map = creer_liste_vide();
   gencarte(15);
   genCarteOK = 1;
@@ -28,7 +28,7 @@ int main (int argc, char* argv[]){
 
   srand(getpid());
   
-  ia = creer_ia(RAYON);;
+  ia = creer_ia(RAYON);
   
   for (;;)
   {
@@ -42,10 +42,10 @@ int main (int argc, char* argv[]){
       case SDL_KEYDOWN:
 	  switch( event.key.keysym.sym ){
 	  case SDLK_LEFT:
-              angle -= PI/4;
+              angle -= PI/8;
               break;
 	  case SDLK_RIGHT:
-              angle += PI/4;
+              angle += PI/8;
               break;
 	  default:
 	    break;

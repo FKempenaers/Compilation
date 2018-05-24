@@ -430,3 +430,40 @@ void cartefin(){
   }
 
 }
+
+void maison(double x, double y, double z, double c){
+  glColor3ub(0,0,255);
+  glBegin(GL_QUAD_STRIP);
+
+  glVertex3d(x,y,z);
+  glVertex3d(x,y,z+c);
+  glVertex3d(x,y+c,z);
+  glVertex3d(x,y+c,z+c);
+
+  glVertex3d(x+c,y+c,z);
+  glVertex3d(x+c,y+c,z+c);
+  glVertex3d(x+c,y,z);
+  glVertex3d(x+c,y,z+c);
+
+  glVertex3d(x,y,z);
+  glVertex3d(x,y,z+c);
+
+  glEnd();
+
+  glColor3ub(255,0,0);
+  glBegin(GL_TRIANGLE_STRIP);
+
+  glVertex3d(x,y,z+c);
+  glColor3ub(0,0,255);
+  glVertex3d(x,y+c,z+c);
+  glColor3ub(0,255,0);
+  glVertex3d(x+c/2,y+c/2,z+3*c/2);
+
+  glVertex3d(x+c,y+c,z+c);
+  glVertex3d(x+c,y,z+c);
+  glVertex3d(x+c/2,y+c/2,z+3*c/2);
+  glVertex3d(x,y,z+c);
+  glVertex3d(x,y+c,z+c);
+  
+  glEnd();
+}

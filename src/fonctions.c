@@ -47,8 +47,12 @@ void affichage(){
     if(genCarteOK == 2){
       tmp = nieme(liste_map,idmap+1);
       if(tmp.nelem == -1){
-	if(idmap == nbetage-1){
+	if(idmap < nbetage){
 	  cartefin();
+	  idmap++;
+	  for (i = 0; i < diff*3; i++) {
+	    ias[i] = NULL;
+	  }
 	}
 	else{
 	  tmp.nelem = 15;
@@ -62,17 +66,21 @@ void affichage(){
 	}
       }
       else{
-	tmp = nieme(liste_map, idmap+1);
-	carte = tmp.carte;
-	carteT = tmp.carteT;
-	idmap++;
+	if(idmap < nbetage){
+	  tmp = nieme(liste_map, idmap+1);
+	  carte = tmp.carte;
+	  carteT = tmp.carteT;
+	  idmap++;
+	}
       }
     }
     if(genCarteOK == 3){
       tmp.nelem = 15;
       tmp.carte = carte;
       tmp.carteT = carteT;
-      liste_map = empile(tmp,liste_map);
+      if(liste_map,idmap){
+	liste_map = empile(tmp,liste_map);
+      }
       tmp = nieme(liste_map, idmap-1);
       carte = tmp.carte;
       carteT = tmp.carteT;
@@ -130,43 +138,6 @@ void affiche_snake(double x, double y, double z){
   }
 
   glPopMatrix();
-}
-
-void maison(double x, double y, double z, double c){
-  glColor3ub(0,0,255);
-  glBegin(GL_QUAD_STRIP);
-
-  glVertex3d(x,y,z);
-  glVertex3d(x,y,z+c);
-  glVertex3d(x,y+c,z);
-  glVertex3d(x,y+c,z+c);
-
-  glVertex3d(x+c,y+c,z);
-  glVertex3d(x+c,y+c,z+c);
-  glVertex3d(x+c,y,z);
-  glVertex3d(x+c,y,z+c);
-
-  glVertex3d(x,y,z);
-  glVertex3d(x,y,z+c);
-
-  glEnd();
-
-  glColor3ub(255,0,0);
-  glBegin(GL_TRIANGLE_STRIP);
-
-  glVertex3d(x,y,z+c);
-  glColor3ub(0,0,255);
-  glVertex3d(x,y+c,z+c);
-  glColor3ub(0,255,0);
-  glVertex3d(x+c/2,y+c/2,z+3*c/2);
-
-  glVertex3d(x+c,y+c,z+c);
-  glVertex3d(x+c,y,z+c);
-  glVertex3d(x+c/2,y+c/2,z+3*c/2);
-  glVertex3d(x,y,z+c);
-  glVertex3d(x,y+c,z+c);
-  
-  glEnd();
 }
 
 void init_snake(){

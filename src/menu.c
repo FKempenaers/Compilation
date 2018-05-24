@@ -23,7 +23,7 @@ void menu(){
   moyen[0] = 450;moyen[1]= 350;
   difficile[0] = 450; difficile[1]=450;
   
-  editbox(500,500);
+  editbox(500,550);
 
   glFlush();
   SDL_GL_SwapBuffers();
@@ -122,8 +122,8 @@ void menu(){
       bouton(450,400,"Facile");
       bouton(450,250,"Moyen");
       bouton(450,100,"Difficile");
-      editbox(500,500);
-      readtextbox(500,500,nombre);
+      editbox(500,550);
+      readtextbox(500,550,nombre);
       glFlush();
       SDL_GL_SwapBuffers();
     default:
@@ -147,7 +147,7 @@ void menu(){
 void readtextbox(int x1,int y1,char* string){
   int i,j;
   glColor3d(0.2,0.6,0.2);
-  glRasterPos2i(x1,y1);
+  glRasterPos2i(x1,y1+20);
   j = strlen(string);
   for(i = 0; i < j;i++) glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18,string[i]);
 }

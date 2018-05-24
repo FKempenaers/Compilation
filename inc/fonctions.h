@@ -29,11 +29,10 @@
 
 #define NB_IAS 5
 
-int k,direction;
-int xs,ys,zs;
+double xs,ys,zs;
 double angle;
 double increment;
-int snake[TAILLE_MAX][3];
+double snake[TAILLE_MAX][3];
 double vitesse;
 int compteur;
 int xSouris,ySouris; 

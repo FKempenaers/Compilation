@@ -29,7 +29,7 @@ int main (int argc, char* argv[]){
 
   srand(getpid());
   
-  ia = creer_ia(RAYON);;
+  ia = creer_ia(RAYON);
   
   for (;;)
   {
@@ -43,10 +43,10 @@ int main (int argc, char* argv[]){
       case SDL_KEYDOWN:
 	  switch( event.key.keysym.sym ){
 	  case SDLK_LEFT:
-              angle -= PI/4;
+              angle -= PI/8;
               break;
 	  case SDLK_RIGHT:
-              angle += PI/4;
+              angle += PI/8;
               break;
 	  default:
 	    break;

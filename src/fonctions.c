@@ -186,13 +186,16 @@ void anime_snake(){
   oldY = ys;
   while(angle > 2*PI)
     angle -= 2*PI;
+  while(angle < 0)
+    angle += 2*PI;
+
 
   oldAngle = angle;
   xs += RAYON*2*sin(angle);
   ys += RAYON*2*cos(angle);
 
   i=1;
-  while(carteT[(int)xs][(int)ys]==1){
+  while(carteT[(int)(xs+.5)][(int)(ys+.5)]==1){
     angle = oldAngle;
     xs = oldX;
     ys = oldY;
@@ -226,31 +229,39 @@ void anime_snake(){
   if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
     zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
 
-    if(zs > 5 && zs < 6){
+    if(zs > 7){
       genCarteOK = 2;
-      xs = MAXX - 27;
-      ys = MAXY - 2*2*RAYON;
-      //zs = -4*RAYON;
-      angle += PI;
+      xs = MAXX-40+snake[0][0]-(MINX+15)-RAYON*2;
+      ys = MAXY-2*RAYON*2;
+      zs = RAYON*2+((double)-10/25)*(xs-(MAXX-40));
+      angle = -PI/2;
+      
+      snake[0][0] = xs;
+      snake[0][1] = ys;
+      snake[0][2] = zs;
       for(int i = 1; i <TAILLE_MAX;i++){
 	snake[i][0] = snake[i-1][0]+RAYON*2;
 	snake[i][1] = snake[0][1];
-	snake[i][2] = snake[i][2]-11;
+	snake[i][2] = RAYON*2+((double)-10/25)*(snake[i][0]-(MAXX-40));
       }    	 
     }  
   }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY)&&(idmap>0)){
     zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
     
-    if(zs > -6 && zs < -5){
+    if(zs < -6){
       genCarteOK = 3;
-      xs = MINX + 20;
-      ys = MINY + 3*2*RAYON;
-      // zs = 4*RAYON;
-      angle += PI;
+      xs = MINX+15+snake[0][0]-(MAXX-40)-RAYON*2*3;
+      ys = MINY+13-2*RAYON*2;
+      zs = RAYON*2+((double)10/25)*(xs-(MINX+15));
+      angle = -PI/2;
+      
+      snake[0][0] = xs;
+      snake[0][1] = ys;
+      snake[0][2] = zs;
       for(int i = 1; i <TAILLE_MAX;i++){
 	snake[i][0] = snake[i-1][0]+RAYON*2;
 	snake[i][1] = snake[0][1];
-	snake[i][2] = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
+	snake[i][2] = RAYON*2+((double)10/25)*(snake[i][0]-(MINX+15));
       }    	 
     }
   }else{

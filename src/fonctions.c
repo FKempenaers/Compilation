@@ -165,6 +165,10 @@ void init_snake(){
 void anime_snake(){
   int i;
   double oldAngle,oldX,oldY;
+  char**argv;
+
+  argv = (char**) malloc(sizeof(char*)*1);
+  argv[0] ="snake";
  
   oldX = xs;
   oldY = ys;
@@ -212,7 +216,10 @@ void anime_snake(){
   /*On teleporte le snake sur l'autre rampe*/
   if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
     zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
-
+    if(nbetage == idmap){
+      execvp("bin/snake",argv);
+      exit(0);
+    }
     if(zs > 8){
       genCarteOK = 2;
       xs = MAXX-40+snake[0][0]-(MINX+15)-RAYON*2;

@@ -179,12 +179,11 @@ int check_case(int choix_case, point tete_ia) {
     return 0;
 }
 
-point distance (point depart) {
+point distance(point depart) {
     int i;
     point retour;
     double distance;
     double min = 10000;
-
     for (i = 0; i < TAILLE_MAX; i++) {
         distance = sqrt(pow(snake[i][0] - depart.x, 2) + pow(snake[i][1] - depart.y, 2));
 
@@ -193,7 +192,6 @@ point distance (point depart) {
             retour.y = snake[i][1];
         }
     }
-
     return retour;
 }
 
@@ -302,7 +300,6 @@ void mouvement_ia_fantome (point ia[]) {
     default:
         break;
     }
- 
     avancer_corps(ia, nouveau);
 }
 
@@ -310,7 +307,7 @@ int check_impact(point ia[]){
     int i;
 
     for (i = 1; i < TAILLE_MAX; i++) {
-        if (ia[0].x == snake[i][0] && ia[0].y == snake[i][1]) {
+      if ((int)ia[0].x == (int)snake[i][0] && (int)ia[0].y == (int)snake[i][1]) {
             return 1;
         }
     }
@@ -321,7 +318,7 @@ int check_impact_ia (point ia[]) {
     int i;
 
     for (i = 0; i < TAILLE_MAX; i++) {
-        if (snake[0][0] == ia[i].x && snake[0][1] == ia[i].y) {
+      if ((int)snake[0][0] == (int)ia[i].x && (int)snake[0][1] == (int)ia[i].y) {
             return 1;
         }
     }

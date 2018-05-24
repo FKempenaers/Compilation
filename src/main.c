@@ -8,7 +8,7 @@
 
 int main (int argc, char* argv[]){
   
-  init_snake();
+
 
   SDL_Event event;
   Uint32 last_time = SDL_GetTicks();
@@ -23,19 +23,8 @@ int main (int argc, char* argv[]){
   ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
 
   glutInit(&argc,argv);
-  menu();
 
-  liste_map = creer_liste_vide();
-  gencarte(15);
-  genCarteOK = 1;
-  idmap = 0;
-
-  srand(getpid());
-
-  for (i = 0; i < NB_IAS; i++) {
-    ias[i] = creer_ia(RAYON);
-  }
-
+  init_jeu();
   
   for (;;)
     {
@@ -63,13 +52,15 @@ int main (int argc, char* argv[]){
       affichage();
       anime_snake();
       
-      for (i = 0; i < NB_IAS; i++) {
-	if(i%2==0)
+      for (i = 0; i < diff*3; i++) {
+	if(ias[i] != NULL){
+	if(i==0||i==3||i==6)
 	  mouvement_ia_attentiste(ias[i]);
-	if(i==3)
+	if(i==1||i==4||i==7)
 	  mouvement_ia(ias[i]);
 	else
 	  mouvement_ia_fantome(ias[i]);
+	}
       }
 
 
@@ -81,16 +72,20 @@ int main (int argc, char* argv[]){
       }
 
 
-      for (i = 0; i < NB_IAS; i++) {
-	if (check_impact(ias[i]) == 1) {
-	  printf("touché par IA !\n");
-	}
+      for (i = 0; i < diff*3; i++) {
+	if(ias[i] != NULL){
+	  if (check_impact(ias[i]) == 1) {
+	    printf("touché par IA !\n");
+	    init_jeu();
+	  }
       
-	if (check_impact_ia(ias[i]) != 0) {
-	  printf("L'IA %d a été touché !\n", i);
+	  if (check_impact_ia(ias[i]) != 0) {
+	    printf("L'IA %d a été touché !\n", i);
+	    free(ias[i]);
+	    ias[i] = NULL;
+	  }
 	}
       }
-
       
     }
 

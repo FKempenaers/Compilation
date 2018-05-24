@@ -2,6 +2,21 @@
 
 void affiche_carte(int *carte[4],int x){
   int i;
+  if(x == 9){
+    maison(MINX+2, MINY+40, 0, 7);
+    maison(MINX+10, MINY+70, 0, 7);
+    maison(MINX+5, MINY+50, 0, 7);
+    maison(MINX+15, MAXY-10, 0, 7);
+    maison(MINX+5, MAXY-15, 0, 7);
+
+    maison(MINX+35, MINY+13, 0, 7);
+    maison(MINX+40, MINY+30, 0, 7);
+    maison(MINX+50, MINY+20, 0, 7);
+    maison(MINX+60, MINY+52, 0, 8);
+    maison(MINX+60, MAXY-20, 0, 7);
+    maison(MINX+53, MAXY-35, 0, 7);
+    
+  }
   for(i=0;i<x;i++){
     affiche_mur(carte[0][i],carte[1][i],0,carte[2][i],carte[3][i],10);
   }
@@ -374,18 +389,6 @@ void cartefin(){
   carte[1][7] = MAXY-10;
   carte[2][7] = MINX+15;
   carte[3][7] = MINY+13;
-  if(MINX < 0){
-    carte[0][7] += MINX;
-    carte[1][7] += MINX;
-    carte[2][7] += MINX;
-    carte[3][7] += MINX;
-  }
-  else{
-    carte[0][7] -= MINX;
-    carte[1][7] -= MINX;
-    carte[2][7] -= MINX;
-    carte[3][7] -= MINX;
-  }
      
   trace_segment_bresenInt(carte[0][7],carte[1][7],carte[2][7],carte[3][7]);
 
@@ -393,18 +396,6 @@ void cartefin(){
   carte[1][8] = MAXY-2;
   carte[2][8] = MINX+2;
   carte[3][8] = MINY+13;
-  if(MINX < 0){
-    carte[0][8] += MINX;
-    carte[1][8] += MINX;
-    carte[2][8] += MINX;
-    carte[3][8] += MINX;
-  }
-  else{
-    carte[0][8] -= MINX;
-    carte[1][8] -= MINX;
-    carte[2][8] -= MINX;
-    carte[3][8] -= MINX;
-  }
      
   trace_segment_bresenInt(carte[0][8],carte[1][8],carte[2][8],carte[3][8]);
 

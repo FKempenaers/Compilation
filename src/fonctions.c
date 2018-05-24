@@ -161,11 +161,8 @@ void maison(double x, double y, double z, double c){
 }
 
 void init_snake(){
-  k = angle = compteur = 0;
-  increment = 0.25;
-  vitesse = 0.10;
-  direction = 0;
-  xs = MAXX-RAYON*2*10;
+  angle = -PI/2;
+  xs = MAXX-RAYON*2*TAILLE_MAX;
   ys = MAXY-RAYON*2*2;
   zs = RAYON;
 
@@ -182,8 +179,8 @@ void init_snake(){
 
 
 void anime_snake(){
-  int i,oldX,oldY;
-  double oldAngle;
+  int i;
+  double oldAngle,oldX,oldY;
  
   oldX = xs;
   oldY = ys;
@@ -195,14 +192,14 @@ void anime_snake(){
   ys += RAYON*2*cos(angle);
 
   i=1;
-  while(carteT[xs][ys]==1){
+  while(carteT[(int)xs][(int)ys]==1){
     angle = oldAngle;
     xs = oldX;
     ys = oldY;
     if(i%2==0)
-      angle += i*(PI/4);
+      angle += i*(PI/8);
     else
-      angle -= i*(PI/4);
+      angle -= i*(PI/8);
     
     xs += RAYON*2*sin(angle);
     ys += RAYON*2*cos(angle);
@@ -229,30 +226,31 @@ void anime_snake(){
   if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
     zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
 
-    if(zs == 5){
+    if(zs > 5 && zs < 6){
       genCarteOK = 2;
       xs = MAXX - 27;
-      ys = MAXY - 6;
-      zs = -4*RAYON;
+      ys = MAXY - 2*2*RAYON;
+      //zs = -4*RAYON;
       angle += PI;
       for(int i = 1; i <TAILLE_MAX;i++){
 	snake[i][0] = snake[i-1][0]+RAYON*2;
 	snake[i][1] = snake[0][1];
-	snake[i][2] = snake[i-1][2]-RAYON;
+	snake[i][2] = snake[i][2]-11;
       }    	 
     }  
   }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY)&&(idmap>0)){
     zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
-    if(zs == -5){
+    
+    if(zs > -6 && zs < -5){
       genCarteOK = 3;
       xs = MINX + 20;
-      ys = MINY + 6;
-      zs = 3*RAYON;
+      ys = MINY + 3*2*RAYON;
+      // zs = 4*RAYON;
       angle += PI;
       for(int i = 1; i <TAILLE_MAX;i++){
 	snake[i][0] = snake[i-1][0]+RAYON*2;
 	snake[i][1] = snake[0][1];
-	snake[i][2] = snake[i-1][2]+RAYON;
+	snake[i][2] = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
       }    	 
     }
   }else{

@@ -54,12 +54,12 @@ int main (int argc, char* argv[]){
       
       for (i = 0; i < diff*3; i++) {
 	if(ias[i] != NULL){
-	if(i==0||i==3||i==6)
-	  mouvement_ia_attentiste(ias[i]);
-	if(i==1||i==4||i==7)
-	  mouvement_ia(ias[i]);
-	else
-	  mouvement_ia_fantome(ias[i]);
+	  if(i==0||i==3||i==6)
+	    mouvement_ia_attentiste(ias[i]);
+	  else if(i==1||i==4||i==7)
+	    mouvement_ia(ias[i]);
+	  else
+	    mouvement_ia_fantome(ias[i]);
 	}
       }
 

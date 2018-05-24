@@ -54,5 +54,7 @@ void affiche_cube(int x1, int y1, int z1, int x2,int y2, int z2,double color);
 void affiche_pente(int x1, int y1, int z1, int x2,int y2, int z2);
 void affiche_sol();
 void affiche_ia(point ia[]);
+void init_ia();
+void init_jeu();
 
 #endif

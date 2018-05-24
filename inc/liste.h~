@@ -1,0 +1,30 @@
+#ifndef _LISTE_H
+#define _LISTE_H
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "carte.h"
+#include "fonction.h"
+
+typedef struct map{
+  int nelem;
+  int **carte;
+  int **carteT;
+}map;
+
+struct cellule{
+  int i;
+  map m;
+  struct cellule *suivant;
+};
+
+typedef struct cellule *liste;
+
+liste creer_liste_vide();
+void detruire_liste(liste);
+int est_vide(liste);
+
+liste empile(map,liste);
+point nieme(liste,int);
+
+#endif

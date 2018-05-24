@@ -7,6 +7,8 @@
 #include <sys/types.h>
 #include "../inc/ia.h"
 #include "point.h"
+#include "../inc/carte.h"
+#include "../inc/liste.h"
 
 #define PIXELS_X 1300
 #define PIXELS_Y 700

@@ -14,6 +14,8 @@
 int **carte;
 int **carteT;
 int genCarteOK;
+int idmap;
+
 
 void affiche_mur( int x1, int y1, int z1, int x2,int y2, int z2);
 void affiche_carte(int *carte[4],int x);

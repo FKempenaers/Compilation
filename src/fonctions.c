@@ -4,11 +4,11 @@
 #include "SDL/SDL.h"
 #include <math.h>
 #include "../inc/fonctions.h"
-#include "../inc/carte.h"
 #include "../inc/minimap.h"
 
 void affichage(){
   int i,j;
+  map tmp;
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
   glEnable(GL_LIGHTING);
@@ -41,11 +41,43 @@ void affichage(){
   //trace_grille();
 
   /*****************************/
-  
+  printf("test0\n");
+  if(genCarteOK != 1){
+   
+    if(genCarteOK == 2){
+      tmp = nieme(liste_map,idmap+1);
+      if(tmp.nelem == -1){
+	printf("ici\n");
+	tmp.nelem = 15;
+	tmp.carte = carte;
+	tmp.carteT = carteT;
+	liste_map = empile(tmp,liste_map);
+	gencarte(15);
+	idmap++;
+      }
+      else{
+	printf("ici2\n");
+	tmp = nieme(liste_map, idmap+1);
+	carte = tmp.carte;
+	carteT = tmp.carteT;
+	idmap++;
+      }
+    }
+    if(genCarteOK == 3){
+       printf("ici3\n");
+      tmp = nieme(liste_map, idmap-1);
+      carte = tmp.carte;
+      carteT = tmp.carteT;
+      idmap--;
+    }
+    printf("ici4\n");
+    genCarteOK = 1;
+  }
+   printf("test1\n");
   affiche_carte(carte,15);
   affiche_snake(xs,ys,zs);
   affiche_ia(ia);
-
+printf("test2\n");
 
   /*******************************************************************************/
   /*Partie 2D*/
@@ -67,107 +99,6 @@ void affichage(){
   SDL_GL_SwapBuffers();
 }
 
-void animer(){
-  int i,j,increment2;
-  
-  increment2 = 0;
-  compteur++;
-  if(compteur > RAYON*2){
-    compteur = 0;
-    increment2 = RAYON*2;
-  }
-
-  
-  
-  
-  switch(direction){
-  case 0 :
-    xs+=increment2;
-    break;
-  case 1 :
-    ys+=increment2;
-    break;
-  case 2 :
-    xs-=increment2;
-    break;
-  case 3 :
-    ys-=increment2;
-    break;
-  }
-
-  if(increment2>0){
-    for(i=TAILLE_MAX; i>0; i--){
-	snake[i][0] = snake[i-1][0];
-	snake[i][1] = snake[i-1][1];
-    }
-    snake[0][0] = xs;
-    snake[0][1] = ys;
-    snake[0][2] = zs;
-  }
-
-
-  
-  
-  
-  // glutPostRedisplay();
-}
-
-void clavier(unsigned char key, int x, int y){
-  //increment = -increment;
-  //  pause();
-  glutPostRedisplay();
-}
-
-
-void fleches(int key, int x, int y){
-  switch(key)
-    {
-      //les ifs servent à empecher de prendre la direction opposée à la direction courante
-    case GLUT_KEY_UP:
-      if(direction!=3)
-      direction = 1;
-      break;
-    case GLUT_KEY_DOWN:
-      if(direction!=1)
-      direction = 3;
-      break;
-    case GLUT_KEY_LEFT:
-      if(direction!=0)
-      direction = 2;
-      break;
-    case GLUT_KEY_RIGHT:
-      if(direction!=2)
-      direction = 0;
-      break;
-    }
-}
-
-
-void trace_grille(){
-  int i,j;
-  glColor3ub(255,255,255);
-  for(i = MINX; i <= MAXX; i++){
-    for(j = MINY; j <= MAXY; j++){
-      glBegin(GL_LINES);
-      glVertex2i(i,MINY);
-      glVertex2i(i,MAXY);
-      glEnd();
-      glBegin(GL_LINES);
-      glVertex2i(MINX,j);
-      glVertex2i(MAXX,j);
-      glEnd();
-    }
-  }
-  glColor3ub(0,255,255);
-  glBegin(GL_LINES);
-  glVertex2i(0,MINY);
-  glVertex2i(0,MAXY);
-  glEnd();
-  glBegin(GL_LINES);
-  glVertex2i(MINX,0);
-  glVertex2i(MAXX,0);
-  glEnd();
-}
 
 void affiche_snake(double x, double y, double z){
   int i,j;
@@ -229,7 +160,7 @@ void maison(double x, double y, double z, double c){
 }
 
 void init_snake(){
-   k = angle = compteur = 0;
+  k = angle = compteur = 0;
   increment = 0.25;
   vitesse = 0.10;
   direction = 0;
@@ -252,7 +183,7 @@ void init_snake(){
 void anime_snake(){
   int i,oldX,oldY;
   double oldAngle;
-  
+ 
   oldX = xs;
   oldY = ys;
   while(angle > 2*PI)
@@ -276,29 +207,52 @@ void anime_snake(){
     ys += RAYON*2*cos(angle);
     i++;
   }
-
-  /***Si on est sur une pente**/
-  /*
-  affiche_pente(MINX + 15, MINY+1 , 1,MINX+40,MINY+13,10);
-  affiche_pente(MAXX - 15, MAXY, -10,MAXX-40,MAXY-10,1);
-  */
-  if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
-    zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
-  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY) ){
-    zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
-  }else{
-    zs = RAYON;
-  }
-    
-
-  for(i=TAILLE_MAX; i>0; i--){
+  for(i=TAILLE_MAX-1; i>0; i--){
     snake[i][0] = snake[i-1][0];
     snake[i][1] = snake[i-1][1];
     snake[i][2] = snake[i-1][2];
   }
+  
   snake[0][0] = xs;
   snake[0][1] = ys;
   snake[0][2] = zs;
+
+
+  /***Si on est sur une pente**/
+  /*
+    affiche_pente(MINX + 15, MINY+1 , 1,MINX+40,MINY+13,10);
+    affiche_pente(MAXX - 15, MAXY, -10,MAXX-40,MAXY-10,1);
+  */
+  if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
+    zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
+
+    if(zs == 5){
+      genCarteOK = 2;
+      xs = MAXX - 27;
+      ys = MAXY - 6;
+      zs = 4*RAYON;
+      for(int i = 1; i <TAILLE_MAX;i++){
+	snake[i][0] = snake[i-1][0]+RAYON*2;
+	snake[i][1] = snake[0][1];
+	snake[i][2] = snake[i-1][2]+RAYON;
+      }    	 
+    }  
+  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY) ){
+    zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
+    if(zs == 5){
+      genCarteOK = 3;
+      xs = MINX + 27;
+      ys = MINY + 6;
+      zs = 4*RAYON;
+      for(int i = 1; i <TAILLE_MAX;i++){
+	snake[i][0] = snake[i-1][0]+RAYON*2;
+	snake[i][1] = snake[0][1];
+	snake[i][2] = snake[i-1][2]+RAYON;
+      }    	 
+    }
+  }else{
+    zs = RAYON;
+  }
 }
 
 void affiche_ia(point* ia){

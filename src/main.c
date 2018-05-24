@@ -5,7 +5,6 @@
 #include "../inc/ia.h"
 #include "../inc/fonctions.h"
 
-
 int main (int argc, char* argv[]){
   
   init_snake();
@@ -21,12 +20,11 @@ int main (int argc, char* argv[]){
   SDL_WM_SetCaption("SnakeVSold",NULL);
   ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
 
+  liste_map = creer_liste_vide();
+  gencarte(15);
+  genCarteOK = 1;
+  idmap = 0;
 
-  if(genCarteOK != 0 && genCarteOK != 1) genCarteOK = 0;
-  if(genCarteOK == 0){
-    gencarte(15);
-    genCarteOK = 1;
-  }
   srand(getpid());
   
   ia = creer_ia(RAYON);
@@ -48,13 +46,15 @@ int main (int argc, char* argv[]){
 	  case SDLK_RIGHT:
               angle += PI/4;
               break;
+	  default:
+	    break;
 	  }
+      default:
+	break;
       }
       affichage();
       anime_snake();
-      
       mouvement_ia(ia);
-      
       ellapsed_time = SDL_GetTicks() - start_time;
 
       if (ellapsed_time < 200){

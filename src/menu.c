@@ -17,7 +17,6 @@ void menu(){
   SDL_GL_SwapBuffers();
   sleep(60);
   
-  
 }
 
 void ligne(int x1,int y1,int y2){

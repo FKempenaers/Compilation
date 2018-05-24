@@ -77,7 +77,15 @@ void affichage(){
   affiche_carte(carte,15);
   affiche_snake(xs,ys,zs);
   affiche_ia(ia);
+<<<<<<< HEAD
 printf("test2\n");
+=======
+  /*
+  for (i = 0; i < NB_IAS; i++) {
+      affiche_ia(ias[i]);
+  }
+  */
+>>>>>>> refs/remotes/origin/dev
 
   /*******************************************************************************/
   /*Partie 2D*/
@@ -99,7 +107,10 @@ printf("test2\n");
   SDL_GL_SwapBuffers();
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/dev
 void affiche_snake(double x, double y, double z){
   int i,j;
   GLUquadric* lol;

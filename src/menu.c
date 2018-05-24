@@ -4,8 +4,8 @@ int jouer[2];
 int score[2];
 
 void menu(){
-
-  //glDisable(GL_LIGHTING);
+  int b = 0;
+  SDL_Event event;
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -18,11 +18,31 @@ void menu(){
   bouton(450,200,"SCORE");
   jouer[0] = 450;jouer[1] = 400;
   score[0] = 450,jouer[1] = 200;
-
- 
   glFlush();
   SDL_GL_SwapBuffers();
-  glutMouseFunc(Gestionclic);
+  b = 0;
+  while(b == 0){
+    SDL_WaitEvent(&event);
+    switch(event.type){
+    case SDL_QUIT:
+      exit(0);
+      break;
+    case SDL_MOUSEBUTTONUP:
+      if(in(jouer,event.button.x,event.button.y)){
+	b = 1;
+      }
+      if(in(score,event.button.x,event.button.y)){
+	b = 2;
+      }
+      break;
+    }
+  }
+  if(b == 1){
+    jouerM();
+  }
+  if(b == 8){
+    scoreM();
+  }
 
 }
 
@@ -38,7 +58,6 @@ void jouerM(){
   bouton(450,400,"JOUER");
   jouer[0] = 450;jouer[1] = 400;
 
-  glutMouseFunc(Gestionclic);
   glFlush();
   SDL_GL_SwapBuffers();
 }
@@ -55,7 +74,6 @@ void scoreM(){
   bouton(450,400,"SCORE");
   jouer[0] = 450;jouer[1] = 400;
 
-  glutMouseFunc(Gestionclic);
   glFlush();
   SDL_GL_SwapBuffers();
 
@@ -79,21 +97,6 @@ void boutoncadre(int x1,int x2,int y1,int y2){
   glVertex2i(x2,y2);
   glVertex2i(x1,y2);
   glEnd();
-}
-
-void Gestionclic(int button,int state,int x,int y){
-  while(1){
-    if(button == GLUT_LEFT_BUTTON){
-      if(in(jouer,x,y)){
-	printf("test1\n");
-	jouerM();
-      }
-      if(in(score,x,y)){
-	printf("test2\n");
-	scoreM();
-      }
-    }
-  }
 }
 
 int in(int *bouton,int x, int y){

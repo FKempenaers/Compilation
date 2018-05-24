@@ -165,8 +165,8 @@ void init_snake(){
   increment = 0.25;
   vitesse = 0.10;
   direction = 0;
-  xs = MINX+RAYON*2+5;
-  ys = MINY+5;
+  xs = MAXX-RAYON*2*10;
+  ys = MAXY-RAYON*2*2;
   zs = RAYON;
 
   snake[0][0] = xs;
@@ -174,7 +174,7 @@ void init_snake(){
   snake[0][2] = zs;
 
   for(int i = 1; i <TAILLE_MAX;i++){
-    snake[i][0] = snake[i-1][0]-RAYON*2;
+    snake[i][0] = snake[i-1][0]+RAYON*2;
     snake[i][1] = 0;
     snake[i][2] = RAYON;
   }
@@ -224,6 +224,8 @@ void anime_snake(){
     affiche_pente(MINX + 15, MINY+1 , 1,MINX+40,MINY+13,10);
     affiche_pente(MAXX - 15, MAXY, -10,MAXX-40,MAXY-10,1);
   */
+  /*On utilise genCarteOK pour signaler le chargement du nouvel etage*/
+  /*On teleporte le snake sur l'autre rampe*/
   if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
     zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
 
@@ -231,20 +233,22 @@ void anime_snake(){
       genCarteOK = 2;
       xs = MAXX - 27;
       ys = MAXY - 6;
-      zs = 4*RAYON;
+      zs = -4*RAYON;
+      angle += PI;
       for(int i = 1; i <TAILLE_MAX;i++){
 	snake[i][0] = snake[i-1][0]+RAYON*2;
 	snake[i][1] = snake[0][1];
-	snake[i][2] = snake[i-1][2]+RAYON;
+	snake[i][2] = snake[i-1][2]-RAYON;
       }    	 
     }  
-  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY) ){
+  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY)&&(idmap>0)){
     zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
-    if(zs == 5){
+    if(zs == -5){
       genCarteOK = 3;
-      xs = MINX + 27;
+      xs = MINX + 20;
       ys = MINY + 6;
-      zs = 4*RAYON;
+      zs = 3*RAYON;
+      angle += PI;
       for(int i = 1; i <TAILLE_MAX;i++){
 	snake[i][0] = snake[i-1][0]+RAYON*2;
 	snake[i][1] = snake[0][1];

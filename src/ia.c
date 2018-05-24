@@ -279,7 +279,6 @@ void mouvement_ia_attentiste(point ia[]) {
 void mouvement_ia_fantome (point ia[]) {
     point nouveau;
     point cible = distance(ia[0]);
-    fprintf(stderr, "test1\n");
     nouveau.x = ia[0].x;
     nouveau.y = ia[0].y;
     nouveau.z = ia[0].z;

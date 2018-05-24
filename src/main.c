@@ -14,16 +14,13 @@ int main (int argc, char* argv[]){
   Uint32 last_time = SDL_GetTicks();
   Uint32 current_time,ellapsed_time;
   Uint32 start_time;
-  SDL_Surface *ecran = NULL;
   int i;
   
   SDL_Init(SDL_INIT_VIDEO);
   atexit(SDL_Quit);
   SDL_WM_SetCaption("SnakeVSold",NULL);
-  ecran = SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
-
+  SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
   glutInit(&argc,argv);
-
   init_jeu();
   
   for (;;)
@@ -63,7 +60,6 @@ int main (int argc, char* argv[]){
 	}
       }
 
-
       
       ellapsed_time = SDL_GetTicks() - start_time;
 
@@ -71,22 +67,18 @@ int main (int argc, char* argv[]){
 	SDL_Delay(200 - ellapsed_time);
       }
 
-
       for (i = 0; i < diff*3; i++) {
 	if(ias[i] != NULL){
 	  if (check_impact(ias[i]) == 1) {
-	    printf("touché par IA !\n");
 	    init_jeu();
 	  }
       
 	  if (check_impact_ia(ias[i]) != 0) {
-	    printf("L'IA %d a été touché !\n", i);
 	    free(ias[i]);
 	    ias[i] = NULL;
 	  }
 	}
       }
-      
     }
 
   return 0;

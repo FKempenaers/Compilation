@@ -27,7 +27,7 @@
 #define TAILLE_PIXEL 0.5
 #define RAYON 1
 
-#define NB_IAS 5
+#define NB_IAS 15
 
 double xs,ys,zs;
 double angle;

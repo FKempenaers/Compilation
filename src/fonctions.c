@@ -299,6 +299,7 @@ void affiche_ia(point* ia){
 void init_ia(){
   int i;
   for (i = 0; i < diff*3; i++) {
+    free(ias[i]);
     ias[i] = NULL;
   }
   

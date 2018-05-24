@@ -50,10 +50,13 @@ void affichage(){
 	tmp.carte = carte;
 	tmp.carteT = carteT;
 	liste_map = empile(tmp,liste_map);
+	carte = NULL;
+	carteT = NULL;
 	gencarte(15);
 	idmap++;
       }
       else{
+	printf("test2");
 	tmp = nieme(liste_map, idmap+1);
 	carte = tmp.carte;
 	carteT = tmp.carteT;
@@ -61,7 +64,6 @@ void affichage(){
       }
     }
     if(genCarteOK == 3){
-       printf("ici3\n");
       tmp = nieme(liste_map, idmap-1);
       carte = tmp.carte;
       carteT = tmp.carteT;

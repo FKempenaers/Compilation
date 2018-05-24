@@ -2,55 +2,11 @@
 
 
 void menu(){
-  int b = 0;
-  
-  int jouer[2];
-  int score[2];
-  SDL_Event event;
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluOrtho2D(0, 1300, 0, 700);
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  bouton(450,400,"JOUER");
-  bouton(450,200,"SCORE");
-  jouer[0] = 450;jouer[1] = 400;
-  score[0] = 450,jouer[1] = 200;
-  glFlush();
-  SDL_GL_SwapBuffers();
-  b = 0;
-  while(b == 0){
-    SDL_WaitEvent(&event);
-    switch(event.type){
-    case SDL_QUIT:
-      exit(0);
-      break;
-    case SDL_MOUSEBUTTONUP:
-      if(in(jouer,event.button.x,event.button.y)){
-	b = 1;
-      }
-      if(in(score,event.button.x,event.button.y)){
-	b = 2;
-      }
-      break;
-    }
-  }
-  if(b == 1){
-    jouerM();
-  }
-  if(b == 2){
-    scoreM();
-  }
-
-}
-
-void jouerM(){
   int b,i;
   
-  int jouer[2];
+  int facile[2];
+  int moyen[2];
+  int difficile[2];
   char nombre[4];
   SDL_Event event;
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -61,8 +17,13 @@ void jouerM(){
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
-  bouton(450,400,"JOUER");
-  jouer[0] = 450;jouer[1] = 200;
+  bouton(450,400,"Facile");
+  bouton(450,250,"Moyen");
+  bouton(450,100,"Difficile");
+  facile[0] = 450;facile[1] = 200;
+  moyen[0] = 450;moyen[1]= 350;
+  difficile[0] = 450; difficile[1]=450;
+  
   editbox(500,500);
 
   glFlush();
@@ -78,8 +39,14 @@ void jouerM(){
       exit(0);
       break;
     case SDL_MOUSEBUTTONUP:
-      if(in(jouer,event.button.x,event.button.y)){
+      if(in(facile,event.button.x,event.button.y)){
 	b = 1;
+      }
+      if(in(moyen,event.button.x,event.button.y)){
+	b = 2;
+      }
+      if(in(difficile,event.button.x,event.button.y)){
+	b = 3;
       }
       break;
     case SDL_KEYDOWN:
@@ -153,7 +120,9 @@ void jouerM(){
 
       glMatrixMode(GL_MODELVIEW);
       glLoadIdentity();
-      bouton(450,400,"JOUER");
+      bouton(450,400,"Facile");
+      bouton(450,250,"Moyen");
+      bouton(450,100,"Difficile");
       editbox(500,500);
       readtextbox(500,500,nombre);
       SDL_GL_SwapBuffers();
@@ -163,6 +132,7 @@ void jouerM(){
     
   }
   diff = b;
+  printf("%d\n",b);
   nbetage = atoi(nombre);
   if(nbetage > 100){
     nbetage = 100;
@@ -170,24 +140,10 @@ void jouerM(){
   if(nbetage < 1){
     nbetage = 1;
   }
+
+  
 }
 
-void scoreM(){
-  glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluOrtho2D(0, 1300, 0, 700);
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  bouton(450,400,"SCORE");
-  //jouer[0] = 450;jouer[1] = 400;
-
-  glFlush();
-  SDL_GL_SwapBuffers();
-
-}
 void readtextbox(int x1,int y1,char* string){
   int i,j;
   glColor3d(0.2,0.6,0.2);

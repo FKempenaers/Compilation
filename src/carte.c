@@ -341,7 +341,6 @@ int trace_point2(int x,int y){
 void cartefin(){
 
   int i,ii,jj;
-  int dim;
   carteT = (int**) calloc((MAXY-MINY),sizeof(int*));
   for(i = 0;i < (MAXX-MINX);i++){
     carteT[i] = (int*)calloc((MAXY-MINY),sizeof(int));

@@ -11,8 +11,7 @@ int main (int argc, char* argv[]){
 
 
   SDL_Event event;
-  Uint32 last_time = SDL_GetTicks();
-  Uint32 current_time,ellapsed_time;
+  Uint32 ellapsed_time;
   Uint32 start_time;
   int i;
   
@@ -50,6 +49,7 @@ int main (int argc, char* argv[]){
 	default:
 	  break;
 	}
+
       affichage();
       anime_snake();
       
@@ -74,7 +74,8 @@ int main (int argc, char* argv[]){
       for (i = 0; i < diff*3; i++) {
 	if(ias[i] != NULL){
 	  if (check_impact(ias[i]) == 1) {
-	    init_jeu();
+	    execvp("bin/snake",argv);
+	    exit(0);
 	  }
       
 	  if (check_impact_ia(ias[i]) != 0) {

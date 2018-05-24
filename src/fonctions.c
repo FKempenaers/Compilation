@@ -8,7 +8,7 @@
 #include "../inc/menu.h"
 
 void affichage(){
-  int i,j;
+  int i;
   map tmp;
   glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
   glEnable(GL_DEPTH_TEST);
@@ -111,7 +111,7 @@ void affichage(){
 }
 
 void affiche_snake(double x, double y, double z){
-  int i,j;
+  int i;
   GLUquadric* q;
   q = gluNewQuadric();
  
@@ -279,7 +279,7 @@ void anime_snake(){
 }
 
 void affiche_ia(point* ia){
-  int i,j;
+  int i;
   GLUquadric* q;
   q = gluNewQuadric();
  

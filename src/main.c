@@ -15,6 +15,7 @@ int main (int argc, char* argv[]){
   Uint32 current_time,ellapsed_time;
   Uint32 start_time;
   SDL_Surface *ecran = NULL;
+  int i;
   
   SDL_Init(SDL_INIT_VIDEO);
   atexit(SDL_Quit);
@@ -30,48 +31,66 @@ int main (int argc, char* argv[]){
   idmap = 0;
 
   srand(getpid());
-  
-  ia = creer_ia(RAYON);
+
+  for (i = 0; i < NB_IAS; i++) {
+    ias[i] = creer_ia(RAYON);
+  }
+
   
   for (;;)
-  {
+    {
       start_time = SDL_GetTicks();
       SDL_PollEvent(&event);
       switch(event.type)
-      {
-      case SDL_QUIT:
+	{
+	case SDL_QUIT:
 	  exit(0);
 	  break;
-      case SDL_KEYDOWN:
+	case SDL_KEYDOWN:
 	  switch( event.key.keysym.sym ){
 	  case SDLK_LEFT:
-              angle -= PI/8;
-              break;
+	    angle -= PI/8;
+	    break;
 	  case SDLK_RIGHT:
-              angle += PI/8;
-              break;
+	    angle += PI/8;
+	    break;
 	  default:
 	    break;
 	  }
-      default:
-	break;
-      }
+	default:
+	  break;
+	}
       affichage();
       anime_snake();
-      mouvement_ia(ia);
+      
+      for (i = 0; i < NB_IAS; i++) {
+	if(i%2==0)
+	  mouvement_ia_attentiste(ias[i]);
+	if(i==3)
+	  mouvement_ia(ias[i]);
+	else
+	  mouvement_ia_fantome(ias[i]);
+      }
+
+
+      
       ellapsed_time = SDL_GetTicks() - start_time;
 
       if (ellapsed_time < 200){
 	SDL_Delay(200 - ellapsed_time);
       }
 
-      if (check_impact(ia) == 1) {
-          printf("touché par IA !\n");
-      }
+
+      for (i = 0; i < NB_IAS; i++) {
+	if (check_impact(ias[i]) == 1) {
+	  printf("touché par IA !\n");
+	}
       
-      if (check_impact_ia(ia) != 0) {
-          printf("L'IA %d a été touché !\n", check_impact_ia(ia));
+	if (check_impact_ia(ias[i]) != 0) {
+	  printf("L'IA %d a été touché !\n", i);
+	}
       }
+
       
     }
 

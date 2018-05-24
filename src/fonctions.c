@@ -77,13 +77,11 @@ void affichage(){
   }
   affiche_carte(carte,15);
   affiche_snake(xs,ys,zs);
-  affiche_ia(ia);
   
-  /*
   for (i = 0; i < NB_IAS; i++) {
       affiche_ia(ias[i]);
   }
-  */
+  
 
   /*******************************************************************************/
   /*Partie 2D*/

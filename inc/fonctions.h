@@ -33,6 +33,8 @@ double xs,ys,zs;
 double angle;
 double increment;
 double snake[TAILLE_MAX][3];
+point* ias[NB_IAS];
+
 double vitesse;
 int compteur;
 int xSouris,ySouris; 

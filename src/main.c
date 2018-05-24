@@ -21,6 +21,10 @@ int main (int argc, char* argv[]){
   SDL_WM_SetCaption("SnakeVSold",NULL);
   SDL_SetVideoMode(TAILLE_X,TAILLE_Y,32,SDL_HWSURFACE | SDL_GL_DOUBLEBUFFER | SDL_OPENGL);
   glutInit(&argc,argv);
+  
+  
+  
+  
   init_jeu();
   
   for (;;)

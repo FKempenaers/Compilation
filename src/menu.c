@@ -13,9 +13,8 @@ void menu(){
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   gluOrtho2D(0, 1300, 0, 700);
-
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
+  //glMatrixMode(GL_MODELVIEW);
+  //glLoadIdentity();
 
   bouton(450,400,"Facile");
   bouton(450,250,"Moyen");
@@ -118,19 +117,21 @@ void menu(){
       glLoadIdentity();
       gluOrtho2D(0, 1300, 0, 700);
 
-      glMatrixMode(GL_MODELVIEW);
-      glLoadIdentity();
+      //glMatrixMode(GL_MODELVIEW);
+      //glLoadIdentity();
       bouton(450,400,"Facile");
       bouton(450,250,"Moyen");
       bouton(450,100,"Difficile");
       editbox(500,500);
       readtextbox(500,500,nombre);
+      glFlush();
       SDL_GL_SwapBuffers();
     default:
       break;
     }
     
   }
+  
   diff = b;
   nbetage = atoi(nombre);
   if(nbetage > 100){

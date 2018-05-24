@@ -41,13 +41,11 @@ void affichage(){
   //trace_grille();
 
   /*****************************/
-  printf("test0\n");
   if(genCarteOK != 1){
    
     if(genCarteOK == 2){
       tmp = nieme(liste_map,idmap+1);
       if(tmp.nelem == -1){
-	printf("ici\n");
 	tmp.nelem = 15;
 	tmp.carte = carte;
 	tmp.carteT = carteT;
@@ -56,7 +54,6 @@ void affichage(){
 	idmap++;
       }
       else{
-	printf("ici2\n");
 	tmp = nieme(liste_map, idmap+1);
 	carte = tmp.carte;
 	carteT = tmp.carteT;
@@ -70,10 +67,8 @@ void affichage(){
       carteT = tmp.carteT;
       idmap--;
     }
-    printf("ici4\n");
     genCarteOK = 1;
   }
-   printf("test1\n");
   affiche_carte(carte,15);
   affiche_snake(xs,ys,zs);
   affiche_ia(ia);

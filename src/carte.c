@@ -337,3 +337,97 @@ int trace_point2(int x,int y){
     return 0;
   }
 }
+
+void cartefin(){
+
+  int i,ii,jj;
+  int dim;
+  carteT = (int**) calloc((MAXY-MINY),sizeof(int*));
+  for(i = 0;i < (MAXX-MINX);i++){
+    carteT[i] = (int*)calloc((MAXY-MINY),sizeof(int));
+  }
+  carte = (int**) malloc(sizeof(int*)*4);
+  for(i=0; i  < 4 ; i ++){
+    carte[i] = (int*)malloc(sizeof(int)*9);
+    if(carte[i] == NULL){
+      printf("error gen carte allocation mémoire\n");
+      exit (-1);
+    }
+  }
+  /*if(MINX < 0) dim = (MINX*-1)+MAXX;
+  else if(MINX == 0) dim = MAXX;
+  else dim = MAXX-MINX;*/
+  
+  carte[0][0] = MINX+1; carte[1][0] = MINY+1; carte[2][0] = MINX+1; carte[3][0] = MAXY-1;
+  trace_segment_bresenInt(carte[0][0],carte[1][0],carte[2][0],carte[3][0]);
+  carte[0][1] = MINX+1; carte[1][1] = MAXY-1; carte[2][1] = MAXX-1; carte[3][1] = MAXY-1;
+  trace_segment_bresenInt(carte[0][1],carte[1][1],carte[2][1],carte[3][1]);
+  carte[0][2] = MAXX-1; carte[1][2] = MAXY-1; carte[2][2] = MAXX-1; carte[3][2] = MINY+1;
+  trace_segment_bresenInt(carte[0][2],carte[1][2],carte[2][2],carte[3][2]);
+  carte[0][3] = MAXX-1; carte[1][3] = MINY+1; carte[2][3] = MINX+1; carte[3][3] = MINY+1;
+  trace_segment_bresenInt(carte[0][3],carte[1][3],carte[2][3],carte[3][3]);
+
+  trace_segment_bresenInt(MAXX-1,MAXY-10,MAXX-40,MAXY-10);
+  carte[0][4] = MAXX-40; carte[1][4] = MAXY-10; carte[2][4] = MAXX-2; carte[3][4] = MAXY-10;
+  trace_segment_bresenInt(MINX+40,MINY+13,MINX+15,MINY+13);
+  carte[0][5] = MINX+40; carte[1][5] = MINY+13; carte[2][5] = MINX+15; carte[3][5] = MINY+13;
+  trace_segment_bresenInt(MINX+41,MINY+3,MINX+41,MINY+13);
+  carte[0][6] = MINX+41; carte[1][6] = MINY+13; carte[2][6] = MINX+41; carte[3][6] = MINY+1;
+  
+  carte[0][7] = MAXX-40;
+  carte[1][7] = MAXY-10;
+  carte[2][7] = MINX+15;
+  carte[3][7] = MINY+13;
+  if(MINX < 0){
+    carte[0][7] += MINX;
+    carte[1][7] += MINX;
+    carte[2][7] += MINX;
+    carte[3][7] += MINX;
+  }
+  else{
+    carte[0][7] -= MINX;
+    carte[1][7] -= MINX;
+    carte[2][7] -= MINX;
+    carte[3][7] -= MINX;
+  }
+     
+  trace_segment_bresenInt(carte[0][7],carte[1][7],carte[2][7],carte[3][7]);
+
+  carte[0][8] = MAXX-65;
+  carte[1][8] = MAXY-2;
+  carte[2][8] = MINX+2;
+  carte[3][8] = MINY+13;
+  if(MINX < 0){
+    carte[0][8] += MINX;
+    carte[1][8] += MINX;
+    carte[2][8] += MINX;
+    carte[3][8] += MINX;
+  }
+  else{
+    carte[0][8] -= MINX;
+    carte[1][8] -= MINX;
+    carte[2][8] -= MINX;
+    carte[3][8] -= MINX;
+  }
+     
+  trace_segment_bresenInt(carte[0][8],carte[1][8],carte[2][8],carte[3][8]);
+
+  for(ii = 0; ii < MAXY;ii++){
+    for(jj = 0;jj < MAXX;jj++){
+      if(carteT[ii][jj] == 2){
+	carteT[ii][jj] = 1;
+      }
+    }
+  }
+  for(ii = MAXX-15;ii > MAXX-40;ii--){
+    for(jj = MAXY-3; jj > MAXY-10;jj--){
+      carteT[ii][jj] = 3;
+    }
+  }
+  for(ii = MINX+15;ii < MINX+40;ii++){
+    for(jj = MINY+3; jj <MINY+13;jj++){
+      carteT[ii][jj] = 3;
+    }
+  }
+
+}

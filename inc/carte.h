@@ -26,5 +26,6 @@ void affiche_sol();
 void gencarte(int n);
 int Bresenham_enti(int x1, int y1, int x2, int y2);
 int trace_point2(int x,int y);
+void cartefin();
 
 #endif

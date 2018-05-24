@@ -132,7 +132,6 @@ void menu(){
     
   }
   diff = b;
-  printf("%d\n",b);
   nbetage = atoi(nombre);
   if(nbetage > 100){
     nbetage = 100;

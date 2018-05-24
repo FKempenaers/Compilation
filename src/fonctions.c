@@ -73,7 +73,7 @@ void affichage(){
       tmp.nelem = 15;
       tmp.carte = carte;
       tmp.carteT = carteT;
-      if(liste_map,idmap){
+      if(liste_map,idmap == -1){
 	liste_map = empile(tmp,liste_map);
       }
       tmp = nieme(liste_map, idmap-1);
@@ -224,7 +224,7 @@ void anime_snake(){
 	snake[i][2] = RAYON*2+((double)-10/25)*(snake[i][0]-(MAXX-40));
       }    	 
     }  
-  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY)&&(idmap>0)){
+  }else if( (snake[0][0]>MAXX-40)&&(snake[0][0]<MAXX-15)&&(snake[0][1]>MAXY-10)&&(snake[0][1]<MAXY)&&(idmap>0)&&(idmap<nbetage)){
     zs = RAYON*2+((double)-10/25)*(snake[0][0]-(MAXX-40));
     
     if(zs < -6){

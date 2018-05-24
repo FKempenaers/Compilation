@@ -64,6 +64,10 @@ void affichage(){
       }
     }
     if(genCarteOK == 3){
+      tmp.nelem = 15;
+      tmp.carte = carte;
+      tmp.carteT = carteT;
+      liste_map = empile(tmp,liste_map);
       tmp = nieme(liste_map, idmap-1);
       carte = tmp.carte;
       carteT = tmp.carteT;
@@ -229,7 +233,7 @@ void anime_snake(){
   if( (snake[0][0] > MINX+15)&&(snake[0][0]<MINX+40)&&(snake[0][1] > MINY+1)&&(snake[0][1]<MINY+13) ){
     zs = RAYON*2+((double)10/25)*(snake[0][0]-(MINX+15));
 
-    if(zs > 7){
+    if(zs > 8){
       genCarteOK = 2;
       xs = MAXX-40+snake[0][0]-(MINX+15)-RAYON*2;
       ys = MAXY-2*RAYON*2;

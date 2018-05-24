@@ -47,9 +47,9 @@ void affichage(){
     if(genCarteOK == 2){
       tmp = nieme(liste_map,idmap+1);
       if(tmp.nelem == -1){
-	if(idmap == nbetage-1){
+	if(idmap > nbetage-2){
 	  cartefin();
-	  idmap++;
+	  idmap = nbetage;
 	}
 	else{
 	  tmp.nelem = 15;
@@ -84,7 +84,12 @@ void affichage(){
     genCarteOK = 1;
     init_ia();
   }
-  affiche_carte(carte,15);
+  if(nbetage == idmap){
+    affiche_carte(carte,9);
+  }
+  else{
+    affiche_carte(carte,15);
+  }
   affiche_snake(xs,ys,zs);
   
   for (i = 0; i < diff*3; i++) {

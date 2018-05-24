@@ -347,15 +347,12 @@ void cartefin(){
   }
   carte = (int**) malloc(sizeof(int*)*4);
   for(i=0; i  < 4 ; i ++){
-    carte[i] = (int*)malloc(sizeof(int)*9);
+    carte[i] = (int*)malloc(sizeof(int)*8);
     if(carte[i] == NULL){
       printf("error gen carte allocation mémoire\n");
       exit (-1);
     }
   }
-  /*if(MINX < 0) dim = (MINX*-1)+MAXX;
-  else if(MINX == 0) dim = MAXX;
-  else dim = MAXX-MINX;*/
   
   carte[0][0] = MINX+1; carte[1][0] = MINY+1; carte[2][0] = MINX+1; carte[3][0] = MAXY-1;
   trace_segment_bresenInt(carte[0][0],carte[1][0],carte[2][0],carte[3][0]);
